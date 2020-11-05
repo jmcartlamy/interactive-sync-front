@@ -1,0 +1,50 @@
+{
+    "name": "interactive-sync-front",
+    "version": "0.0.1",
+    "private": true,
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --config webpack.prod.js",
+        "start": "webpack-dev-server --config webpack.dev.js"
+    },
+    "keywords": [
+        "twitch",
+        "extension"
+    ],
+    "babel": {
+        "presets": [
+            "@babel/preset-react"
+        ]
+    },
+    "prettier": {
+        "semi": true,
+        "singleQuote": true,
+        "printWidth": 100,
+        "tabWidth": 4
+    },
+    "author": "Jean-Marie Cart-Lamy <jihem@cartlamy.com>",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@babel/core": "^7.11.4",
+        "@babel/preset-react": "^7.10.4",
+        "babel-loader": "^8.1.0",
+        "css-loader": "^4.2.2",
+        "file-loader": "^6.0.0",
+        "html-webpack-plugin": "^4.4.1",
+        "mini-css-extract-plugin": "^0.11.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
+        "prettier": "^2.1.2",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0",
+        "webpack-merge": "^5.1.3"
+    },
+    "dependencies": {
+        "axios": "^0.20.0",
+        "jsonwebtoken": "^8.5.1",
+        "preact": "^10.5.4",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    }
+}
