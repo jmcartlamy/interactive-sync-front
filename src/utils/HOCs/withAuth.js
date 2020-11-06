@@ -28,10 +28,15 @@ const auth = {
 
     // Prepare request to make calls
     createRequest: function (method = 'GET', path = '') {
+        const host =
+            process.env.NODE_ENV === 'production'
+                ? '//interactive-sync-ebs.azurewebsites.net/'
+                : '//localhost:8081/';
+
         if (this.isAuthenticated()) {
             return {
                 method: method,
-                url: location.protocol + '//localhost:8081/' + path,
+                url: location.protocol + host + path,
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${state.token}`,
