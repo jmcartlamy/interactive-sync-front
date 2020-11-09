@@ -5,7 +5,7 @@ import withActions from '../../utils/HOCs/withActions';
 
 import './Button.css';
 
-const Button = ({ name, label, scheduledTimestamp, auth, twitch }) => {
+const Button = ({ name, label, scheduledTimestamp, auth, twitch, userCooldown }) => {
     /**
      * Set action on click
      */
@@ -21,6 +21,7 @@ const Button = ({ name, label, scheduledTimestamp, auth, twitch }) => {
         if (isSending) return;
         setIsSending(true);
         await setAction(auth, twitch, name, setMessage);
+        userCooldown.set(true, 3000);
         if (isMounted.current) {
             setIsSending(false);
         }
@@ -47,7 +48,7 @@ const Button = ({ name, label, scheduledTimestamp, auth, twitch }) => {
                 className="Button"
                 id={name}
                 onClick={sendRequest}
-                disabled={countdown && countdown > 0}
+                disabled={(userCooldown && userCooldown.value) || (countdown && countdown > 0)}
             >
                 {label}
             </button>

@@ -13,9 +13,12 @@ class VideoOverlay extends React.Component {
     constructor(props) {
         super(props);
 
+        this.setCooldownForUser = this.setCooldownForUser.bind(this);
+
         this.state = {
             userInterface: null,
             actions: null,
+            userIsInCooldown: false,
         };
     }
 
@@ -63,9 +66,25 @@ class VideoOverlay extends React.Component {
         }
     }
 
+    setCooldownForUser(value, time) {
+        this.setState({
+            userIsInCooldown: value,
+        });
+
+        if (time) {
+            const timeout = setTimeout(() => {
+                this.setState({
+                    userIsInCooldown: !value,
+                });
+                clearTimeout(timeout);
+            }, 3000);
+        }
+    }
+
     render() {
-        const { userInterface, actions } = this.state;
+        const { userInterface, actions, userIsInCooldown } = this.state;
         const { auth, twitch } = this.props;
+        const userCooldown = { set: this.setCooldownForUser, value: userIsInCooldown };
 
         const Components = {
             title: Title,
@@ -85,12 +104,13 @@ class VideoOverlay extends React.Component {
                     <div className="VideoOverlay-components">
                         {/* TODO improve user interface UI*/}
                         {userInterface.components &&
-                            userInterface.components.map(({ type, ...props }) => 
+                            userInterface.components.map(({ type, ...props }) =>
                                 React.createElement(Components[type], {
                                     ...props,
                                     auth,
                                     twitch,
                                     actions,
+                                    userCooldown,
                                 })
                             )}
                     </div>

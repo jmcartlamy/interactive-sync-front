@@ -12,9 +12,12 @@ class Panel extends React.Component {
     constructor(props) {
         super(props);
 
+        this.setCooldownForUser = this.setCooldownForUser.bind(this);
+
         this.state = {
             userInterface: null,
             actions: null,
+            userIsInCooldown: false,
         };
     }
 
@@ -62,9 +65,25 @@ class Panel extends React.Component {
         }
     }
 
+    setCooldownForUser(value, time) {
+        this.setState({
+            userIsInCooldown: value,
+        });
+
+        if (time) {
+            const timeout = setTimeout(() => {
+                this.setState({
+                    userIsInCooldown: !value,
+                });
+                clearTimeout(timeout);
+            }, 3000);
+        }
+    }
+
     render() {
-        const { userInterface, actions } = this.state;
+        const { userInterface, actions, userIsInCooldown } = this.state;
         const { auth, twitch } = this.props;
+        const userCooldown = { set: this.setCooldownForUser, value: userIsInCooldown };
 
         const Components = {
             title: Title,
@@ -81,6 +100,7 @@ class Panel extends React.Component {
                                 auth,
                                 twitch,
                                 actions,
+                                userCooldown,
                             })
                         )}
                 </div>
