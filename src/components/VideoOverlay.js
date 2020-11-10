@@ -94,23 +94,56 @@ class VideoOverlay extends React.Component {
         if (userInterface) {
             return (
                 <div className="VideoOverlay">
-                    {userInterface.mouse && (
-                        <MouseEvent
-                            mouseInterface={userInterface.mouse}
-                            auth={auth}
-                            twitch={twitch}
-                        />
-                    )}
-                    <div className="VideoOverlay-components">
+                    <div className="VideoOverlay-center-components">
                         {/* TODO improve user interface UI*/}
-                        {userInterface.components &&
-                            userInterface.components.map(({ type, ...props }) =>
+                        {userInterface.left && userInterface.left.components && (
+                            <div className="VideoOverlay-left-components">
+                                {userInterface.left.components.map(({ type, ...props }) =>
+                                    React.createElement(Components[type], {
+                                        ...props,
+                                        auth,
+                                        twitch,
+                                        actions,
+                                        userCooldown,
+                                        direction: 'column'
+                                    })
+                                )}
+                            </div>
+                        )}
+                        {userInterface.mouse ? (
+                            <MouseEvent
+                                mouseInterface={userInterface.mouse}
+                                auth={auth}
+                                twitch={twitch}
+                            />
+                        ) : <div className="VideoOverlay-middle-components" />}
+                        {userInterface.right && userInterface.right.components && (
+                            <div className="VideoOverlay-right-components">
+                                {userInterface.right.components.map(({ type, ...props }) =>
+                                    React.createElement(Components[type], {
+                                        ...props,
+                                        auth,
+                                        twitch,
+                                        actions,
+                                        userCooldown,
+                                        direction: 'column'
+                                    })
+                                )}
+                            </div>
+                        )}
+                    </div>
+                    <div className="VideoOverlay-bottom-components">
+                        {/* TODO improve user interface UI*/}
+                        {userInterface.bottom &&
+                            userInterface.bottom.components &&
+                            userInterface.bottom.components.map(({ type, ...props }) =>
                                 React.createElement(Components[type], {
                                     ...props,
                                     auth,
                                     twitch,
                                     actions,
                                     userCooldown,
+                                    direction: 'row'
                                 })
                             )}
                     </div>

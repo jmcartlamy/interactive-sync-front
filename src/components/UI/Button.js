@@ -5,7 +5,15 @@ import withActions from '../../utils/HOCs/withActions';
 
 import './Button.css';
 
-const Button = ({ name, label, scheduledTimestamp, auth, twitch, userCooldown }) => {
+const Button = ({
+    name,
+    label,
+    scheduledTimestamp,
+    auth,
+    twitch,
+    userCooldown,
+    direction = 'row',
+}) => {
     /**
      * Set action on click
      */
@@ -42,7 +50,7 @@ const Button = ({ name, label, scheduledTimestamp, auth, twitch, userCooldown })
     }
 
     return (
-        <div key={name} className="Button-container">
+        <div key={name} className={`Button-container Button-container-${direction}`}>
             <button
                 type="button"
                 className="Button"

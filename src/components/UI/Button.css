@@ -8,6 +8,14 @@
     align-items: center;
 }
 
+.Button-container-row {
+    flex-direction: row;
+}
+
+.Button-container-column {
+    flex-direction: column;
+}
+
 .Button-loader {
     display: inline-block;
     border: 3px solid #f3f3f3;

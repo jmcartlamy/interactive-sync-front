@@ -101,6 +101,7 @@ class Panel extends React.Component {
                                 twitch,
                                 actions,
                                 userCooldown,
+                                direction: 'row'
                             })
                         )}
                 </div>
