@@ -4,6 +4,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import withAuth from '../utils/HOCs/withAuth';
 import Panel from './Panel';
 import VideoOverlay from './VideoOverlay';
+import Mobile from './Mobile';
 
 import './App.css';
 
@@ -90,6 +91,9 @@ class App extends React.Component {
         }
         if (view === 'video_overlay') {
             return <VideoOverlay twitch={this.twitch} />;
+        }
+        if (view === 'mobile') {
+            return <Mobile twitch={this.twitch} />;
         }
         return null;
     }
