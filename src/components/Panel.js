@@ -2,89 +2,22 @@ import React from 'react';
 import Button from './UI/Button';
 import Title from './UI/Title';
 
-import withAuth from '../utils/HOCs/withAuth';
-import getUserInterface from '../api/getUserInterface';
-import getAllActions from '../api/getAllActions';
+import withTwitch from '../utils/HOCs/withTwitch';
 
 import './Panel.css';
 
-class Panel extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.setCooldownForUser = this.setCooldownForUser.bind(this);
-
-        this.state = {
-            userInterface: null,
-            actions: null,
-            userIsInCooldown: false,
-        };
-    }
-
-    async componentDidMount() {
-        const { auth, twitch } = this.props;
-
-        if (twitch) {
-            const userInterface = await getUserInterface(auth, twitch);
-            if (userInterface && userInterface.panel) {
-                this.setState({
-                    userInterface: userInterface.panel,
-                });
-            }
-
-            const actions = await getAllActions(auth, twitch);
-            this.setState({
-                actions,
-            });
-
-            twitch.listen('broadcast', (target, contentType, body) => {
-                const parseData = JSON.parse(body);
-                if (parseData.type === 'action') {
-                    const { actionId, actionCooldown } = parseData.data;
-                    this.setState({
-                        actions: {
-                            ...this.state.actions,
-                            [actionId]: Date.now() + actionCooldown,
-                        },
-                    });
-                } else if (parseData.type === 'user_interface') {
-                    twitch.rig.log('Received broadcast user_interface', parseData.data);
-                    this.setState({
-                        userInterface: parseData.data.panel,
-                    });
-                }
-            });
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.props.twitch) {
-            this.props.twitch.unlisten('broadcast', () =>
-                twitch.rig.log('Successfully unlistened')
-            );
-        }
-    }
-
-    setCooldownForUser(value, time) {
-        this.setState({
-            userIsInCooldown: value,
-        });
-
-        if (time) {
-            const timeout = setTimeout(() => {
-                this.setState({
-                    userIsInCooldown: !value,
-                });
-                clearTimeout(timeout);
-            }, 3000);
-        }
-    }
-
+class Panel extends React.PureComponent {
     render() {
-        const { userInterface, actions, userIsInCooldown } = this.state;
-        const { auth, twitch } = this.props;
-        const userCooldown = { set: this.setCooldownForUser, value: userIsInCooldown };
+        const {
+            auth,
+            twitch,
+            setCooldownForUser,
+            userInterface,
+            actions,
+            userIsInCooldown,
+        } = this.props;
 
+        const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
         const Components = {
             title: Title,
             button: Button,
@@ -94,14 +27,14 @@ class Panel extends React.Component {
             return (
                 <div className="Panel">
                     {userInterface.components &&
-                        userInterface.components.map(({ type, ...props }) =>
+                        userInterface.components.map(({ type, ...properties }) =>
                             React.createElement(Components[type], {
-                                ...props,
+                                ...properties,
                                 auth,
                                 twitch,
                                 actions,
                                 userCooldown,
-                                direction: 'row'
+                                direction: 'row',
                             })
                         )}
                 </div>
@@ -112,4 +45,4 @@ class Panel extends React.Component {
     }
 }
 
-export default withAuth(Panel);
+export default withTwitch(Panel, 'panel');

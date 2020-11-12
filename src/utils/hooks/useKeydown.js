@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 export default function useKeydown(code, action) {
     useEffect(() => {
-        console.log(code)
         function onKeydown(e) {
             if (e.code === code) {
                 action();

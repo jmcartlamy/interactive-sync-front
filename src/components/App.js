@@ -30,7 +30,6 @@ class App extends React.Component {
                     if (auth.token) {
                         // Request permission and reload extension if user accept
                         this.requestTwitchUserIdShare(auth.token);
-                        // TODO userSelfHandler
                     }
                     // Set user auth
                     this.props.auth.setUserAuth(auth);
@@ -85,16 +84,18 @@ class App extends React.Component {
     }
 
     renderView() {
-        const { view } = this.props;
-        if (view === 'panel') {
-            return <Panel twitch={this.twitch} />;
+        const { view, auth } = this.props;
+        const Components = {
+            panel: Panel,
+            video_overlay: VideoOverlay,
+            mobile: Mobile,
+        };
+        const Component = Components[view];
+
+        if (Component) {
+            return <Component twitch={this.twitch} auth={auth} />;
         }
-        if (view === 'video_overlay') {
-            return <VideoOverlay twitch={this.twitch} />;
-        }
-        if (view === 'mobile') {
-            return <Mobile twitch={this.twitch} />;
-        }
+
         return null;
     }
 
