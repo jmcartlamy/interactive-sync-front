@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import setAction from '../../api/setAction';
 import useInterval from '../../utils/hooks/useInterval';
+import useKeydown from '../../utils/hooks/useKeydown';
 import withActions from '../../utils/HOCs/withActions';
 
 import './Button.css';
@@ -12,10 +13,11 @@ const Button = ({
     auth,
     twitch,
     userCooldown,
+    keyCode,
     direction = 'row',
 }) => {
     /**
-     * Set action on click
+     * Prepare request
      */
     const [isSending, setIsSending] = useState(false);
     const isMounted = useRef(true);
@@ -25,6 +27,9 @@ const Button = ({
         };
     }, []);
     const [message, setMessage] = useState('');
+    /**
+     * Send request on call
+     */
     const sendRequest = useCallback(async () => {
         if (isSending) return;
         setIsSending(true);
@@ -34,6 +39,11 @@ const Button = ({
             setIsSending(false);
         }
     }, [isSending]);
+
+    /**
+     * Set action on keydown
+     */
+    useKeydown(keyCode, sendRequest);
 
     /**
      * Countdown before enabling the button again
