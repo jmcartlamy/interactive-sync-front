@@ -41,7 +41,11 @@ class Panel extends React.PureComponent {
             );
         }
 
-        return <Title label="¯\_(ツ)_/¯" />;
+        return (
+            <div className="Panel">
+                <Title label="¯\_(ツ)_/¯" />
+            </div>
+        );
     }
 }
 

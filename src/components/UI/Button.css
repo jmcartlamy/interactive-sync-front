@@ -1,5 +1,20 @@
+/**
+ * General
+ */
+
+.Button-loader {
+    display: inline-block;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    -webkit-animation: spin 0.8s linear infinite; /* Safari */
+    animation: spin 0.8s linear infinite;
+}
+
 .Button {
-    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
     margin: 6px 14px;
 }
 
@@ -15,18 +30,6 @@
 .Button-container-column {
     flex-direction: column;
 }
-
-.Button-loader {
-    display: inline-block;
-    border: 3px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 3px solid #666666;
-    width: 16px;
-    height: 16px;
-    -webkit-animation: spin 0.8s linear infinite; /* Safari */
-    animation: spin 0.8s linear infinite;
-}
-
 /* Safari */
 @-webkit-keyframes spin {
     0% {
@@ -44,4 +47,64 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+/**
+ * Theme
+ */
+
+.App-light .Button-loader {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #666666;
+}
+
+.App-dark .Button-loader {
+    border: 3px solid #666666;
+    border-top: 3px solid #f3f3f3;
+}
+
+/**
+ * Views
+ */
+
+.VideoOverlay .Button {
+    flex-direction: column;
+    align-items: center;
+}
+
+.VideoOverlay .Button > * {
+    margin-top: 5px;
+}
+
+.Panel .Button {
+    width: 100%;
+}
+
+.Mobile .Button {
+    align-items: center;
+    margin: 0;
+    padding: 20px 20px;
+    width: 100%;
+    background: #212026;
+    color: #e5e3e8;
+    border: none;
+    height: 65px;
+    border-bottom: 2px solid #2b2a32;
+}
+
+.Mobile .Button:hover,
+.Mobile .Button:focus {
+    background: #2b2a32;
+    outline: none;
+}
+
+.Mobile .Button:disabled,
+.Mobile .Button[disabled] {
+    color: #989898;
+    background: #322f37;
+}
+
+.Mobile .Button-loader {
+    border: 3px solid #666666;
+    border-top: 3px solid #f3f3f3;
 }

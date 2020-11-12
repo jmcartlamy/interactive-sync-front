@@ -1,8 +1,10 @@
 import React from 'react';
 import Button from './UI/Button';
 import Title from './UI/Title';
+import Header from './UI/Header';
 
 import withTwitch from '../utils/HOCs/withTwitch';
+import './Mobile.css';
 
 class Mobile extends React.PureComponent {
     render() {
@@ -23,7 +25,9 @@ class Mobile extends React.PureComponent {
 
         if (userInterface) {
             return (
-                <div className="Panel">
+                <div className="Mobile">
+                    {userInterface.title && <Header className label={userInterface.title} />}
+
                     {userInterface.components &&
                         userInterface.components.map(({ type, ...properties }) =>
                             React.createElement(Components[type], {
@@ -39,7 +43,11 @@ class Mobile extends React.PureComponent {
             );
         }
 
-        return <Title label="¯\_(ツ)_/¯" />;
+        return (
+            <div className="Mobile">
+                <Title label="¯\_(ツ)_/¯" />
+            </div>
+        );
     }
 }
 

@@ -1,3 +1,21 @@
+/**
+ * General
+ */
+
 .Title {
     margin: 6px 14px 6px;
+    font-weight: normal;
+}
+
+/**
+ * Views
+ */
+
+.Mobile .Title {
+    display: flex;
+    align-items: center;
+    background: #322f37;
+    margin: 0;
+    padding: 20px 20px;
+    height: 25px;
 }

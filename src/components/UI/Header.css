@@ -1,0 +1,13 @@
+/**
+ * General
+ */
+
+.Header {
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    font-weight: normal;
+    background: #322f37;
+    border-bottom: 2px solid #2b2a32;
+}

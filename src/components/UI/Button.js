@@ -69,12 +69,12 @@ const Button = ({
                 disabled={(userCooldown && userCooldown.value) || (countdown && countdown > 0)}
             >
                 {label}
+                {!countdown && message && <span>{message}</span>}
+                {countdown && countdown > 0 && (
+                    <span className="countdown">{countdown.toFixed(1)}</span>
+                )}
+                {isSending && <div className="Button-loader"></div>}
             </button>
-            {countdown && countdown > 0 && (
-                <span className="countdown">{countdown.toFixed(1)}</span>
-            )}
-            {!countdown && message && <span>{message}</span>}
-            {isSending && <div className="Button-loader"></div>}
         </div>
     );
 };

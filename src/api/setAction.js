@@ -23,7 +23,8 @@ export default async function (auth, twitch, name, setMessage) {
                         clearTimeout(tempTimeout);
                     }, 3000);
                 } else {
-                    setMessage('Denied');
+                    // TODO add notification
+                    setMessage('');
                 }
                 logError(twitch.rig.log, error);
             });
