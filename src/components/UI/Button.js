@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import classNames from 'classnames';
+import { useRipple } from 'react-use-ripple';
 import setAction from '../../api/setAction';
 import useInterval from '../../utils/hooks/useInterval';
 import useKeydown from '../../utils/hooks/useKeydown';
@@ -41,6 +43,12 @@ const Button = ({
     }, [isSending]);
 
     /**
+     * Ripple on button
+     */
+    const rippleRef = useRef();
+    useRipple(rippleRef);
+
+    /**
      * Set action on keydown
      */
     useKeydown(keyCode, sendRequest);
@@ -50,30 +58,37 @@ const Button = ({
      */
     const countdownRemaining = scheduledTimestamp ? scheduledTimestamp - Date.now() : null;
     const [countdown, setCountdown] = useState(null);
-    if (countdownRemaining > 0) {
-        useInterval(
-            () => setCountdown(countdownRemaining / 1000), // In sec
-            100
-        );
-    } else {
-        setCountdown(null);
-    }
+    useInterval(() => {
+        if (countdownRemaining > 0) {
+            setCountdown(countdownRemaining / 1000);
+        } else {
+            setCountdown(null);
+        }
+    }, 100);
+
+    // TODO message
+    const disabled =
+        (userCooldown && userCooldown.value) || (countdown && countdown > 0) || isSending;
 
     return (
         <div key={name} className={`Button-container Button-container-${direction}`}>
             <button
                 type="button"
                 className="Button"
+                ref={rippleRef}
                 id={name}
                 onClick={sendRequest}
-                disabled={(userCooldown && userCooldown.value) || (countdown && countdown > 0)}
+                disabled={disabled}
             >
                 {label}
-                {!countdown && message && <span>{message}</span>}
-                {countdown && countdown > 0 && (
-                    <span className="countdown">{countdown.toFixed(1)}</span>
+                {disabled && (
+                    <div className="Button-overlay">
+                        {countdown && countdown > 0 && (
+                            <span className="Button-overlay-countdown">{countdown.toFixed(1)}</span>
+                        )}
+                        {isSending && <div className="Button-overlay-loader"></div>}
+                    </div>
                 )}
-                {isSending && <div className="Button-loader"></div>}
             </button>
         </div>
     );

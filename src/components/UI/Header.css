@@ -8,6 +8,19 @@
     display: flex;
     justify-content: center;
     font-weight: normal;
+}
+
+/**
+ * Theme
+ */
+
+.App-light .Header {
+    background: #ffffff;
+    color: #000000;
+    border-bottom: 1px solid #dfdee2;
+}
+
+.App-dark .Header {
     background: #322f37;
     border-bottom: 2px solid #2b2a32;
 }

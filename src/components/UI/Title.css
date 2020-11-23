@@ -4,7 +4,12 @@
 
 .Title {
     margin: 6px 14px 6px;
+    padding: 5px;
     font-weight: normal;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 /**
@@ -18,4 +23,16 @@
     margin: 0;
     padding: 20px 20px;
     height: 25px;
+}
+
+/**
+ * Theme
+ */
+
+.App-light .Title {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.App-dark .Title {
+    background-color: rgba(0, 0, 0, 0.7);
 }

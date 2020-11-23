@@ -3,13 +3,13 @@ body {
 }
 
 .App-light {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #232127;
     height: 100%;
 }
 
 .App-dark {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #e5e3e8;
     height: 100%;
 }

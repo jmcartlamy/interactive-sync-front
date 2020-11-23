@@ -32,15 +32,3 @@
     flex-direction: column;
     width: 125px;
 }
-
-.App-light .VideoOverlay-bottom-components,
-.App-light .VideoOverlay-left-components,
-.App-light .VideoOverlay-right-components {
-    background-color: rgba(255, 255, 255, 0.7);
-}
-
-.App-dark .VideoOverlay-bottom-components,
-.App-dark .VideoOverlay-left-components,
-.App-dark .VideoOverlay-right-components {
-    background-color: rgba(0, 0, 0, 0.7);
-}
