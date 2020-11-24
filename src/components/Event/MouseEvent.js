@@ -38,6 +38,7 @@ const MouseEvent = ({ mouseInterface, auth, twitch }) => {
     const handleMouse = useCallback(
         async (evt, item) => {
             if (isSending || isCooldown) return;
+            if (item.cooldown < 1000) item.cooldown = 1000;
             const params = {
                 ...item,
                 clientWidth: document.body.clientWidth,
