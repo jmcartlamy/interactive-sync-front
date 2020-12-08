@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { logError, logSuccess } from '../utils/log';
 
-export default async function (auth, twitch, name, setMessage) {
+export default async function (view, auth, twitch, name, setMessage) {
     twitch.rig.log('Requesting an action', name);
     const baseRequest = auth.createRequest('POST', 'action/new');
 
     if (baseRequest) {
         const request = {
             ...baseRequest,
-            data: { id: name },
+            data: { id: name, view },
         };
 
         return axios(request)

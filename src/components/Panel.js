@@ -34,6 +34,7 @@ class Panel extends React.PureComponent {
                                 twitch,
                                 actions,
                                 userCooldown,
+                                view: 'panel',
                                 direction: 'row',
                             })
                         )}

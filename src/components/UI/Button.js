@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import classNames from 'classnames';
 import { useRipple } from 'react-use-ripple';
 import setAction from '../../api/setAction';
 import useInterval from '../../utils/hooks/useInterval';
@@ -9,6 +8,7 @@ import withActions from '../../utils/HOCs/withActions';
 import './Button.css';
 
 const Button = ({
+    view,
     name,
     label,
     scheduledTimestamp,
@@ -35,7 +35,7 @@ const Button = ({
     const sendRequest = useCallback(async () => {
         if (isSending) return;
         setIsSending(true);
-        await setAction(auth, twitch, name, setMessage);
+        await setAction(view, auth, twitch, name, setMessage);
         userCooldown.set(true, 3000);
         if (isMounted.current) {
             setIsSending(false);

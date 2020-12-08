@@ -36,6 +36,7 @@ class Mobile extends React.PureComponent {
                                 twitch,
                                 actions,
                                 userCooldown,
+                                view: 'mobile',
                                 direction: 'row',
                             })
                         )}

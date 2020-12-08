@@ -41,6 +41,7 @@ class VideoOverlay extends React.PureComponent {
                                     React.createElement(Components[type], {
                                         ...properties,
                                         ...props,
+                                        view: 'video_overlay',
                                         direction: 'column',
                                     })
                                 )}
@@ -61,6 +62,7 @@ class VideoOverlay extends React.PureComponent {
                                     React.createElement(Components[type], {
                                         ...properties,
                                         ...props,
+                                        view: 'video_overlay',
                                         direction: 'column',
                                     })
                                 )}
@@ -75,6 +77,7 @@ class VideoOverlay extends React.PureComponent {
                                 React.createElement(Components[type], {
                                     ...properties,
                                     ...props,
+                                    view: 'video_overlay',
                                     direction: 'row',
                                 })
                             )}
