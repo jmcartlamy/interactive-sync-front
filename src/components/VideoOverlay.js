@@ -16,6 +16,7 @@ class VideoOverlay extends React.PureComponent {
             userInterface,
             actions,
             userIsInCooldown,
+            setCooldownOnAction,
         } = this.props;
 
         const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
@@ -28,6 +29,7 @@ class VideoOverlay extends React.PureComponent {
             twitch,
             actions,
             userCooldown,
+            setCooldownOnAction,
         };
 
         if (userInterface) {

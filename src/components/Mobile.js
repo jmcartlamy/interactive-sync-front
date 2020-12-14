@@ -11,10 +11,11 @@ class Mobile extends React.PureComponent {
         const {
             auth,
             twitch,
-            setCooldownForUser,
             userInterface,
             actions,
+            setCooldownForUser,
             userIsInCooldown,
+            setCooldownOnAction,
         } = this.props;
 
         const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
@@ -36,6 +37,7 @@ class Mobile extends React.PureComponent {
                                 twitch,
                                 actions,
                                 userCooldown,
+                                setCooldownOnAction,
                                 view: 'mobile',
                                 direction: 'row',
                             })

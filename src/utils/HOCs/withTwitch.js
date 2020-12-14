@@ -10,6 +10,7 @@ function withTwitch(WrappedComponent, view) {
             super(props);
 
             this.setCooldownForUser = this.setCooldownForUser.bind(this);
+            this.setCooldownOnAction = this.setCooldownOnAction.bind(this);
 
             this.state = {
                 userInterface: null,
@@ -65,20 +66,30 @@ function withTwitch(WrappedComponent, view) {
             }
         }
 
-        setCooldownForUser(value, time) {
+        setCooldownForUser(boolean, cooldown) {
             this.setState({
-                userIsInCooldown: value,
+                userIsInCooldown: boolean,
             });
 
-            if (time) {
+            if (cooldown) {
                 const timeout = setTimeout(() => {
                     this.setState({
-                        userIsInCooldown: !value,
+                        userIsInCooldown: !boolean,
                     });
                     clearTimeout(timeout);
-                }, 3000);
+                }, cooldown);
             }
         }
+
+        setCooldownOnAction(actionId, cooldown) {
+            this.setState({
+                actions: {
+                    ...this.state.actions,
+                    [actionId]: Date.now() + cooldown,
+                },
+            });
+        }
+
         render() {
             if (this.state.loading) {
                 return <Title label="Loading" />;
@@ -89,6 +100,7 @@ function withTwitch(WrappedComponent, view) {
                     {...this.props}
                     {...this.state}
                     setCooldownForUser={this.setCooldownForUser}
+                    setCooldownOnAction={this.setCooldownOnAction}
                 />
             );
         }

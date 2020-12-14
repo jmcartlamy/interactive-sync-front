@@ -15,6 +15,7 @@ class Panel extends React.PureComponent {
             userInterface,
             actions,
             userIsInCooldown,
+            setCooldownOnAction,
         } = this.props;
 
         const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
@@ -34,6 +35,7 @@ class Panel extends React.PureComponent {
                                 twitch,
                                 actions,
                                 userCooldown,
+                                setCooldownOnAction,
                                 view: 'panel',
                                 direction: 'row',
                             })

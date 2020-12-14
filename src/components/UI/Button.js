@@ -15,6 +15,7 @@ const Button = ({
     auth,
     twitch,
     userCooldown,
+    setCooldownOnAction,
     keyCode,
     direction = 'row',
 }) => {
@@ -35,7 +36,7 @@ const Button = ({
     const sendRequest = useCallback(async () => {
         if (isSending) return;
         setIsSending(true);
-        await setAction(view, auth, twitch, name, setMessage);
+        await setAction(view, auth, twitch, name, setMessage, setCooldownOnAction);
         userCooldown.set(true, 3000);
         if (isMounted.current) {
             setIsSending(false);
