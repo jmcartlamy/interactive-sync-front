@@ -38,7 +38,8 @@ const MouseEvent = ({ mouseInterface, auth, twitch }) => {
     const handleMouse = useCallback(
         async (evt, item) => {
             if (isSending || isCooldown) return;
-            if (item.cooldown < 1000) item.cooldown = 1000;
+            if (!item.cooldown.duration || item.cooldown.duration < 1000)
+                item.cooldown.duration = 1000;
             const params = {
                 ...item,
                 clientWidth: document.body.clientWidth,
@@ -50,8 +51,8 @@ const MouseEvent = ({ mouseInterface, auth, twitch }) => {
             setExpand(true);
             await sendMouseEvent(auth, twitch, params);
             setCooldown(true);
-            useTimeout(() => setCooldown(false), item.cooldown);
-            useTimeout(() => setExpand(false), item.cooldown);
+            useTimeout(() => setCooldown(false), item.cooldown.duration);
+            useTimeout(() => setExpand(false), item.cooldown.duration);
 
             if (isMounted.current) {
                 setIsSending(false);

@@ -10,6 +10,7 @@ export default async function (auth, twitch, params) {
             data: {
                 id: params.name,
                 type: params.type,
+                cooldown: params.cooldown,
                 clientWidth: params.clientWidth,
                 clientHeight: params.clientHeight,
                 clientX: params.clientX,
