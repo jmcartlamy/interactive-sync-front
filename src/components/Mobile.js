@@ -1,7 +1,10 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import Button from './UI/Button';
 import Title from './UI/Title';
 import Header from './UI/Header';
+import Modal from './Event/Modal';
 
 import withTwitch from '../utils/HOCs/withTwitch';
 import './Mobile.css';
@@ -13,31 +16,44 @@ class Mobile extends React.PureComponent {
             twitch,
             userInterface,
             actions,
-            setCooldownForUser,
-            userIsInCooldown,
+            userCooldown,
             setCooldownOnAction,
+            action,
+            modal,
         } = this.props;
 
-        const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
         const Components = {
             title: Title,
             button: Button,
         };
 
+        const props = {
+            auth,
+            twitch,
+            actions,
+            userCooldown,
+            setCooldownOnAction,
+            action,
+            modal,
+        };
+
         if (userInterface) {
             return (
                 <div className="Mobile">
+                    <div
+                        className={classNames('Mobile-modal', {
+                            'Mobile-modal-hidden': !modal.isOpen,
+                        })}
+                    >
+                        <Modal modal={modal} action={action} userCooldown={userCooldown} />
+                    </div>
                     {userInterface.title && <Header className label={userInterface.title} />}
 
                     {userInterface.components &&
                         userInterface.components.map(({ type, ...properties }) =>
                             React.createElement(Components[type], {
                                 ...properties,
-                                auth,
-                                twitch,
-                                actions,
-                                userCooldown,
-                                setCooldownOnAction,
+                                ...props,
                                 view: 'mobile',
                                 direction: 'row',
                             })

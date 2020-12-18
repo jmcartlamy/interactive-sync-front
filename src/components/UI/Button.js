@@ -7,6 +7,9 @@ import withActions from '../../utils/HOCs/withActions';
 
 import './Button.css';
 
+// TODO MOBILE & PANEL
+
+// TODO improve source of props
 const Button = ({
     view,
     name,
@@ -14,29 +17,45 @@ const Button = ({
     scheduledTimestamp,
     auth,
     twitch,
+    modal,
+    action,
+    extension,
     userCooldown,
     setCooldownOnAction,
     keyCode,
     direction = 'row',
 }) => {
     /**
-     * Prepare request
+     * On Unmount
      */
-    const [isSending, setIsSending] = useState(false);
     const isMounted = useRef(true);
     useEffect(() => {
         return () => {
             isMounted.current = false;
+            if (modal && action) {
+                modal.setIsOpen(false);
+                action.setCurrent(null);
+            }
         };
     }, []);
-    const [message, setMessage] = useState('');
+
     /**
      * Send request on call
      */
-    const sendRequest = useCallback(async () => {
+    const [isSending, setIsSending] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const sendRequest = () => {
+        if (modal.isOpen) {
+            modal.setIsOpen(false);
+        }
+        sendRequestCallback();
+    };
+
+    const sendRequestCallback = useCallback(async () => {
         if (isSending) return;
         setIsSending(true);
-        await setAction(view, auth, twitch, name, setMessage, setCooldownOnAction);
+        await setAction({ view, auth, twitch, name, setMessage, setCooldownOnAction });
         userCooldown.set(true, 3000);
         if (isMounted.current) {
             setIsSending(false);
@@ -50,9 +69,27 @@ const Button = ({
     useRipple(rippleRef);
 
     /**
+     * Open modal
+     */
+    const openModal = () => {
+        modal.setIsOpen(true);
+        action.setCurrent({
+            view,
+            auth,
+            twitch,
+            name,
+            setMessage,
+            setCooldownOnAction,
+            extension,
+        });
+    };
+
+    /**
      * Set action on keydown
      */
-    useKeydown(keyCode, sendRequest);
+    if (keyCode) {
+        useKeydown(keyCode, sendRequest);
+    }
 
     /**
      * Countdown before enabling the button again
@@ -68,6 +105,7 @@ const Button = ({
     }, 100);
 
     // TODO message
+    const hasExtension = extension && extension.components && extension.components.length;
     const disabled =
         (userCooldown && userCooldown.value) || (countdown && countdown > 0) || isSending;
 
@@ -78,7 +116,7 @@ const Button = ({
                 className="Button"
                 ref={rippleRef}
                 id={name}
-                onClick={sendRequest}
+                onClick={hasExtension ? openModal : sendRequest}
                 disabled={disabled}
             >
                 {label}

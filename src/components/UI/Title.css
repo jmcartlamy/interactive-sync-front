@@ -31,8 +31,10 @@
 
 .App-light .Title {
     background-color: rgba(255, 255, 255, 0.7);
+    color: rgb(35, 33, 39);
 }
 
 .App-dark .Title {
     background-color: rgba(0, 0, 0, 0.7);
+    color: rgb(229, 227, 232);
 }

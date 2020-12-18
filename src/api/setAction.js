@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { logError, logSuccess } from '../utils/log';
 
-export default async function (view, auth, twitch, name, setMessage, setCooldownOnAction) {
+export default async function ({ view, auth, twitch, name, setMessage, setCooldownOnAction }) {
     twitch.rig.log('Requesting an action', name);
     const baseRequest = auth.createRequest('POST', 'action/new');
 
@@ -15,7 +15,6 @@ export default async function (view, auth, twitch, name, setMessage, setCooldown
             .then(function ({ data: actionObject, status }) {
                 logSuccess(twitch.rig.log, actionObject.duration, status);
                 if (!actionObject.broadcast) {
-                    console.log(setCooldownOnAction);
                     setCooldownOnAction(name, actionObject.duration);
                 }
             })

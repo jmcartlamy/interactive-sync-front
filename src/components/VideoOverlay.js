@@ -1,6 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import Button from './UI/Button';
 import Title from './UI/Title';
+import Modal from './Event/Modal';
 
 import MouseEvent from './Event/MouseEvent';
 import withTwitch from '../utils/HOCs/withTwitch';
@@ -12,14 +15,14 @@ class VideoOverlay extends React.PureComponent {
         const {
             auth,
             twitch,
-            setCooldownForUser,
+            modal,
+            action,
             userInterface,
             actions,
-            userIsInCooldown,
+            userCooldown,
             setCooldownOnAction,
         } = this.props;
 
-        const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
         const Components = {
             title: Title,
             button: Button,
@@ -30,11 +33,21 @@ class VideoOverlay extends React.PureComponent {
             actions,
             userCooldown,
             setCooldownOnAction,
+            action,
+            modal,
         };
 
         if (userInterface) {
             return (
                 <div className="VideoOverlay">
+                    <div
+                        className={classNames('VideoOverlay-modal', {
+                            'VideoOverlay-modal-hidden': !modal.isOpen,
+                        })}
+                    >
+                        <Modal modal={modal} action={action} userCooldown={userCooldown} />
+                    </div>
+
                     <div className="VideoOverlay-center-components">
                         {/* TODO improve user interface UI*/}
                         {userInterface.left && userInterface.left.components && (

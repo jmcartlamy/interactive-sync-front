@@ -10,3 +10,31 @@
     margin-left: 20px;
     background-color: #6441a4;
 }
+
+
+.Panel-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.Panel-modal-hidden {
+    z-index: 0;
+    animation: delayZIndex 0.8s forwards;
+}
+
+@keyframes delayZIndex {
+    0% {
+        z-index: 1;
+    }
+    99% {
+        z-index: 1;
+    }
+    100% {
+        z-index: 0;
+    }
+}
+

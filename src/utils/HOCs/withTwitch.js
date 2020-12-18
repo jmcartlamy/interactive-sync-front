@@ -95,11 +95,15 @@ function withTwitch(WrappedComponent, view) {
                 return <Title label="Loading" />;
             }
 
+            const { userInterface, actions, userIsInCooldown } = this.state;
+            const userCooldown = { set: this.setCooldownForUser, value: userIsInCooldown };
+
             return (
                 <WrappedComponent
                     {...this.props}
-                    {...this.state}
-                    setCooldownForUser={this.setCooldownForUser}
+                    userInterface={userInterface}
+                    actions={actions}
+                    userCooldown={userCooldown}
                     setCooldownOnAction={this.setCooldownOnAction}
                 />
             );

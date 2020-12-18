@@ -1,6 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import Button from './UI/Button';
 import Title from './UI/Title';
+import Modal from './Event/Modal';
 
 import withTwitch from '../utils/HOCs/withTwitch';
 
@@ -11,31 +14,45 @@ class Panel extends React.PureComponent {
         const {
             auth,
             twitch,
-            setCooldownForUser,
             userInterface,
             actions,
-            userIsInCooldown,
+            userCooldown,
             setCooldownOnAction,
+            action,
+            modal,
         } = this.props;
 
-        const userCooldown = { set: setCooldownForUser, value: userIsInCooldown };
         const Components = {
             title: Title,
             button: Button,
         };
 
+        const props = {
+            auth,
+            twitch,
+            actions,
+            userCooldown,
+            setCooldownOnAction,
+            action,
+            modal,
+        };
+
+
         if (userInterface) {
             return (
                 <div className="Panel">
+                    <div
+                        className={classNames('Panel-modal', {
+                            'Panel-modal-hidden': !modal.isOpen,
+                        })}
+                    >
+                        <Modal modal={modal} action={action} userCooldown={userCooldown} />
+                    </div>
                     {userInterface.components &&
                         userInterface.components.map(({ type, ...properties }) =>
                             React.createElement(Components[type], {
                                 ...properties,
-                                auth,
-                                twitch,
-                                actions,
-                                userCooldown,
-                                setCooldownOnAction,
+                                ...props,
                                 view: 'panel',
                                 direction: 'row',
                             })
