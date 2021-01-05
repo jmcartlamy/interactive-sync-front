@@ -1,24 +1,22 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useRipple } from 'react-use-ripple';
 import setAction from '../../api/setAction';
+import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
 import useKeydown from '../../utils/hooks/useKeydown';
-import withActions from '../../utils/HOCs/withActions';
 
 import './Button.css';
-
-// TODO MOBILE & PANEL
 
 // TODO improve source of props
 const Button = ({
     view,
     name,
     label,
-    scheduledTimestamp,
     auth,
     twitch,
     modal,
     action,
+    actions,
     extension,
     userCooldown,
     setCooldownOnAction,
@@ -94,6 +92,7 @@ const Button = ({
     /**
      * Countdown before enabling the button again
      */
+    const scheduledTimestamp = pickMatchedActions(actions, name);
     const countdownRemaining = scheduledTimestamp ? scheduledTimestamp - Date.now() : null;
     const [countdown, setCountdown] = useState(null);
     useInterval(() => {
@@ -133,4 +132,4 @@ const Button = ({
     );
 };
 
-export default withActions(Button);
+export default Button;

@@ -48,7 +48,7 @@ const auth = {
 };
 
 function withAuth(WrappedComponent) {
-    class withAuth extends React.Component {
+    class withAuth extends React.PureComponent {
         render() {
             return <WrappedComponent auth={auth} {...this.props} />;
         }

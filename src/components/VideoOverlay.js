@@ -45,7 +45,12 @@ class VideoOverlay extends React.PureComponent {
                             'VideoOverlay-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal modal={modal} action={action} userCooldown={userCooldown} />
+                        <Modal
+                            modal={modal}
+                            action={action}
+                            actions={actions}
+                            userCooldown={userCooldown}
+                        />
                     </div>
 
                     <div className="VideoOverlay-center-components">

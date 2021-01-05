@@ -45,7 +45,12 @@ class Mobile extends React.PureComponent {
                             'Mobile-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal modal={modal} action={action} userCooldown={userCooldown} />
+                        <Modal
+                            modal={modal}
+                            action={action}
+                            userCooldown={userCooldown}
+                            actions={actions}
+                        />
                     </div>
                     {userInterface.title && <Header className label={userInterface.title} />}
 

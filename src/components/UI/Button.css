@@ -125,11 +125,13 @@
     background: #322f37;
 }
 
-.App-light .VideoOverlay .Button .Button-overlay {
+.App-light .VideoOverlay .Button .Button-overlay,
+.App-light .Modal .Modal-button .Button-overlay {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.App-dark .VideoOverlay .Button .Button-overlay {
+.App-dark .VideoOverlay .Button .Button-overlay,
+.App-dark .Modal .Modal-button .Button-overlay {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -166,19 +168,19 @@
     margin-top: 5px;
 }
 
-.VideoOverlay .Button .Button-overlay {
+.VideoOverlay .Button .Button-overlay,
+.Modal .Modal-button .Button-overlay {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     padding: 0;
     top: 0;
-    left: 0;    
+    left: 0;
     margin: 0;
     width: 100%;
     height: 100%;
     color: #e5e3e8;
-    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .Panel .Button {

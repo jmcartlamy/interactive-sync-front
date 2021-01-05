@@ -37,7 +37,6 @@ class Panel extends React.PureComponent {
             modal,
         };
 
-
         if (userInterface) {
             return (
                 <div className="Panel">
@@ -46,7 +45,12 @@ class Panel extends React.PureComponent {
                             'Panel-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal modal={modal} action={action} userCooldown={userCooldown} />
+                        <Modal
+                            modal={modal}
+                            action={action}
+                            actions={actions}
+                            userCooldown={userCooldown}
+                        />
                     </div>
                     {userInterface.components &&
                         userInterface.components.map(({ type, ...properties }) =>
