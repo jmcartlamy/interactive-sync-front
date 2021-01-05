@@ -5,9 +5,9 @@
 
 .Modal-button {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 14px;
-    margin: 6px 14px;
+    margin: 6px 12px;
     transition: background-color 0.3s;
 }
 
@@ -29,21 +29,19 @@
  */
 
 .App-light .Modal {
-    background-color: white;
+    background-color: #ffffff;
 }
 
 .App-dark .Modal {
-    background-color: black;
+    background-color: #000000;
 }
 
 .App-light .Modal-button {
-    color: #000000;
-    background: #efefef;
+    border: 1px solid #dfdee2;
 }
 
 .App-dark .Modal-button {
-    background: #212026;
-    color: #e5e3e8;
+    border: 1px solid #2b2a32;
 }
 
 /**
@@ -70,13 +68,9 @@
     justify-content: center;
 }
 
-.Mobile .Modal-button {
-    margin: 0;
-    padding: 20px;
-    height: 65px;
-    border: none;
-    display: flex;
-    align-items: center;
+.Mobile .Modal-button,
+.Panel .Modal-button {
+    min-height: 45px;
 }
 
 .Mobile .Modal,

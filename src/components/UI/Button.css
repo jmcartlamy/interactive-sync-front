@@ -44,7 +44,6 @@
     outline: none;
 }
 
-
 /* Safari */
 @-webkit-keyframes spin {
     0% {
@@ -68,12 +67,14 @@
  * Theme
  */
 
-.App-light .Button {
+.App-light .Button,
+.App-light .Modal-button {
     color: #000000;
     background: #efefef;
 }
 
-.App-dark .Button {
+.App-dark .Button,
+.App-dark .Modal-button {
     background: #212026;
     color: #e5e3e8;
 }
@@ -83,31 +84,43 @@
     border-top: 3px solid #666666;
 }
 
-.App-light .Button:hover:enabled,
-.App-light .Button:focus:enabled {
-    background: #ffffff;
-    outline: none;
-}
-
-.App-light .Mobile .Button:disabled,
-.App-light .Mobile .Button[disabled] {
-    color: #322f37;
-    background: #cccccc;
-}
-
 .App-dark .Button-overlay-loader {
     border: 3px solid #666666;
     border-top: 3px solid #f3f3f3;
 }
 
+.App-light .Button:hover:enabled,
+.App-light .Button:focus:enabled,
+.App-light .Modal-button:hover:enabled,
+.App-light .Modal-button:focus:enabled {
+    background: #ffffff;
+    outline: none;
+}
+
+.App-light .Mobile .Button:disabled,
+.App-light .Mobile .Button[disabled],
+.App-light .Panel .Button:disabled,
+.App-light .Panel .Button[disabled],
+.App-light .Modal-button:disabled,
+.App-light .Modal-button[disabled] {
+    color: #322f37;
+    background: #cccccc;
+}
+
 .App-dark .Button:hover:enabled,
-.App-dark .Button:focus:enabled {
+.App-dark .Button:focus:enabled,
+.App-dark .Modal-button:hover:enabled,
+.App-dark .Modal-button:focus:enabled {
     background: #2b2a32;
     outline: none;
 }
 
 .App-dark .Mobile .Button:disabled,
-.App-dark .Mobile .Button[disabled] {
+.App-dark .Mobile .Button[disabled],
+.App-dark .Panel .Button:disabled,
+.App-dark .Panel .Button[disabled],
+.App-dark .Modal-button:disabled,
+.App-dark .Modal-button[disabled] {
     color: #989898;
     background: #322f37;
 }
@@ -128,6 +141,14 @@
     background: #212026;
     color: #e5e3e8;
     border-bottom: 2px solid #2b2a32;
+}
+
+.App-light .Panel .Button {
+    border: 1px solid #dfdee2;
+}
+
+.App-dark .Panel .Button {
+    border: 1px solid #2b2a32;
 }
 
 /**
@@ -152,7 +173,7 @@
     position: absolute;
     padding: 0;
     top: 0;
-    left: 0;
+    left: 0;    
     margin: 0;
     width: 100%;
     height: 100%;
@@ -162,6 +183,8 @@
 
 .Panel .Button {
     width: 100%;
+    align-items: center;
+    height: 45px;
 }
 
 .Mobile .Button {

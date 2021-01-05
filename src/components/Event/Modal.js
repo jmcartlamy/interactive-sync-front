@@ -51,7 +51,7 @@ const Modal = ({ modal, action, userCooldown }) => {
     useBodyScrollLock(modalRef.current, modal.isOpen);
 
     // TODO Cooldown on submit when action has been pushed
-    // TODO filter invalid components
+    // TODO filter invalid components (Button)
     const Components = {
         title: Title,
     };
