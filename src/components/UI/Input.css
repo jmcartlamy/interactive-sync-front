@@ -1,0 +1,28 @@
+/**
+ * General
+ */
+
+.Input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 6px 14px 6px;
+    padding: 6px;
+}
+
+.Input-container label {
+    margin: 6px 14px 6px 0;
+    display: flex;
+}
+
+.Input {
+    padding: 6px;
+}
+
+/**
+ * Views
+ */
+
+.Mobile .Input {
+    font-size: 14px;
+    height: 28px;
+}

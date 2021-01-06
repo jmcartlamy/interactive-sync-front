@@ -5,6 +5,7 @@ import { useRipple } from 'react-use-ripple';
 import cross from '../../assets/img/cross.png';
 import setAction from '../../api/setAction';
 import Title from '../UI/Title';
+import Input from '../UI/Input';
 
 import './Modal.css';
 import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
@@ -69,6 +70,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
 
     const Components = {
         title: Title,
+        input: Input
     };
 
     return (
