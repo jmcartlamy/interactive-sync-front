@@ -50,13 +50,15 @@ class VideoOverlay extends React.PureComponent {
                         {/* TODO improve user interface UI*/}
                         {userInterface.left && userInterface.left.components && (
                             <div className="VideoOverlay-left-components">
-                                {userInterface.left.components.map(({ type, ...properties }) =>
-                                    React.createElement(Components[type], {
-                                        ...properties,
-                                        ...props,
-                                        view: 'video_overlay',
-                                        direction: 'column',
-                                    })
+                                {userInterface.left.components.map(
+                                    ({ type, ...properties }) =>
+                                        Components[type] &&
+                                        React.createElement(Components[type], {
+                                            ...properties,
+                                            ...props,
+                                            view: 'video_overlay',
+                                            direction: 'column',
+                                        })
                                 )}
                             </div>
                         )}
@@ -71,13 +73,15 @@ class VideoOverlay extends React.PureComponent {
                         )}
                         {userInterface.right && userInterface.right.components && (
                             <div className="VideoOverlay-right-components">
-                                {userInterface.right.components.map(({ type, ...properties }) =>
-                                    React.createElement(Components[type], {
-                                        ...properties,
-                                        ...props,
-                                        view: 'video_overlay',
-                                        direction: 'column',
-                                    })
+                                {userInterface.right.components.map(
+                                    ({ type, ...properties }) =>
+                                        Components[type] &&
+                                        React.createElement(Components[type], {
+                                            ...properties,
+                                            ...props,
+                                            view: 'video_overlay',
+                                            direction: 'column',
+                                        })
                                 )}
                             </div>
                         )}
@@ -86,13 +90,15 @@ class VideoOverlay extends React.PureComponent {
                         {/* TODO improve user interface UI*/}
                         {userInterface.bottom &&
                             userInterface.bottom.components &&
-                            userInterface.bottom.components.map(({ type, ...properties }) =>
-                                React.createElement(Components[type], {
-                                    ...properties,
-                                    ...props,
-                                    view: 'video_overlay',
-                                    direction: 'row',
-                                })
+                            userInterface.bottom.components.map(
+                                ({ type, ...properties }) =>
+                                    Components[type] &&
+                                    React.createElement(Components[type], {
+                                        ...properties,
+                                        ...props,
+                                        view: 'video_overlay',
+                                        direction: 'row',
+                                    })
                             )}
                     </div>
                 </div>

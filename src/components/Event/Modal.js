@@ -67,7 +67,6 @@ const Modal = ({ modal, userCooldown, actions }) => {
 
     const disabled = (countdown && countdown > 0) || isSending || !modal.isOpen;
 
-    // TODO filter invalid components (Button)
     const Components = {
         title: Title,
     };
@@ -82,8 +81,9 @@ const Modal = ({ modal, userCooldown, actions }) => {
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
             {actions.current && (
                 <>
-                    {actions.current.extension.components.map(({ type, ...properties }) =>
-                        React.createElement(Components[type], properties)
+                    {actions.current.extension.components.map(
+                        ({ type, ...properties }) =>
+                            Components[type] && React.createElement(Components[type], properties)
                     )}
                     {actions.current.extension.submit && (
                         <button
