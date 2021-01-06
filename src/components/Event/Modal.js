@@ -11,14 +11,14 @@ import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
 
-const Modal = ({ modal, action, userCooldown, actions }) => {
+const Modal = ({ modal, userCooldown, actions }) => {
     /**
      * Send request on call
      */
     const [isSending, setIsSending] = useState(false);
     const sendRequest = () => {
         modal.setIsOpen(false);
-        sendRequestCallback(action.current);
+        sendRequestCallback(actions.current);
     };
 
     const sendRequestCallback = useCallback(
@@ -54,7 +54,7 @@ const Modal = ({ modal, action, userCooldown, actions }) => {
     /**
      * Countdown if action has been pushed recently
      */
-    const scheduledTimestamp = action.current && pickMatchedActions(actions, action.current.name);
+    const scheduledTimestamp = actions.current && pickMatchedActions(actions, actions.current.name);
     const countdownRemaining = scheduledTimestamp ? scheduledTimestamp - Date.now() : null;
     const [countdown, setCountdown] = useState(null);
     useInterval(() => {
@@ -67,7 +67,6 @@ const Modal = ({ modal, action, userCooldown, actions }) => {
 
     const disabled = (countdown && countdown > 0) || isSending || !modal.isOpen;
 
-    // TODO rename action or actions
     // TODO filter invalid components (Button)
     const Components = {
         title: Title,
@@ -81,12 +80,12 @@ const Modal = ({ modal, action, userCooldown, actions }) => {
             ref={modalRef}
         >
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
-            {action.current && (
+            {actions.current && (
                 <>
-                    {action.current.extension.components.map(({ type, ...properties }) =>
+                    {actions.current.extension.components.map(({ type, ...properties }) =>
                         React.createElement(Components[type], properties)
                     )}
-                    {action.current.extension.submit && (
+                    {actions.current.extension.submit && (
                         <button
                             ref={rippleRef}
                             type="button"
@@ -95,7 +94,7 @@ const Modal = ({ modal, action, userCooldown, actions }) => {
                             onClick={sendRequest}
                             disabled={disabled}
                         >
-                            {action.current.extension.submit.label}
+                            {actions.current.extension.submit.label}
                             {disabled && (
                                 <div className="Button-overlay">
                                     {countdown && countdown > 0 && (

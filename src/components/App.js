@@ -107,7 +107,7 @@ class App extends React.Component {
     renderView() {
         const { view, auth } = this.props;
         const modal = { isOpen: this.state.modalIsOpen, setIsOpen: this.setModalIsOpen };
-        const action = { current: this.state.currentAction, setCurrent: this.setCurrentAction };
+        const actions = { current: this.state.currentAction, setCurrent: this.setCurrentAction };
 
         const Components = {
             panel: Panel,
@@ -117,7 +117,7 @@ class App extends React.Component {
         const Component = Components[view];
 
         if (Component) {
-            return <Component twitch={this.twitch} auth={auth} modal={modal} action={action} />;
+            return <Component twitch={this.twitch} auth={auth} modal={modal} actions={actions} />;
         }
 
         return null;

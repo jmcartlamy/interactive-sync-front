@@ -18,7 +18,6 @@ class Panel extends React.PureComponent {
             actions,
             userCooldown,
             setCooldownOnAction,
-            action,
             modal,
         } = this.props;
 
@@ -33,7 +32,6 @@ class Panel extends React.PureComponent {
             actions,
             userCooldown,
             setCooldownOnAction,
-            action,
             modal,
         };
 
@@ -45,12 +43,7 @@ class Panel extends React.PureComponent {
                             'Panel-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal
-                            modal={modal}
-                            action={action}
-                            actions={actions}
-                            userCooldown={userCooldown}
-                        />
+                        <Modal modal={modal} actions={actions} userCooldown={userCooldown} />
                     </div>
                     {userInterface.components &&
                         userInterface.components.map(({ type, ...properties }) =>

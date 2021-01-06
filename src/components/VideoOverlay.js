@@ -16,7 +16,6 @@ class VideoOverlay extends React.PureComponent {
             auth,
             twitch,
             modal,
-            action,
             userInterface,
             actions,
             userCooldown,
@@ -33,7 +32,6 @@ class VideoOverlay extends React.PureComponent {
             actions,
             userCooldown,
             setCooldownOnAction,
-            action,
             modal,
         };
 
@@ -45,12 +43,7 @@ class VideoOverlay extends React.PureComponent {
                             'VideoOverlay-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal
-                            modal={modal}
-                            action={action}
-                            actions={actions}
-                            userCooldown={userCooldown}
-                        />
+                        <Modal modal={modal} actions={actions} userCooldown={userCooldown} />
                     </div>
 
                     <div className="VideoOverlay-center-components">

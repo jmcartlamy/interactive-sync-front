@@ -15,7 +15,6 @@ const Button = ({
     auth,
     twitch,
     modal,
-    action,
     actions,
     extension,
     userCooldown,
@@ -30,9 +29,9 @@ const Button = ({
     useEffect(() => {
         return () => {
             isMounted.current = false;
-            if (modal && action) {
+            if (modal) {
                 modal.setIsOpen(false);
-                action.setCurrent(null);
+                actions.setCurrent(null);
             }
         };
     }, []);
@@ -71,7 +70,7 @@ const Button = ({
      */
     const openModal = () => {
         modal.setIsOpen(true);
-        action.setCurrent({
+        actions.setCurrent({
             view,
             auth,
             twitch,

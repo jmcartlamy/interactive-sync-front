@@ -18,7 +18,6 @@ class Mobile extends React.PureComponent {
             actions,
             userCooldown,
             setCooldownOnAction,
-            action,
             modal,
         } = this.props;
 
@@ -33,7 +32,6 @@ class Mobile extends React.PureComponent {
             actions,
             userCooldown,
             setCooldownOnAction,
-            action,
             modal,
         };
 
@@ -45,12 +43,7 @@ class Mobile extends React.PureComponent {
                             'Mobile-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal
-                            modal={modal}
-                            action={action}
-                            userCooldown={userCooldown}
-                            actions={actions}
-                        />
+                        <Modal modal={modal} userCooldown={userCooldown} actions={actions} />
                     </div>
                     {userInterface.title && <Header className label={userInterface.title} />}
 
