@@ -16,13 +16,13 @@
  * Views
  */
 
-.Mobile .Title {
+.Mobile .Title,
+.Panel .Title {
     display: flex;
     align-items: center;
     background: #322f37;
-    margin: 0;
-    padding: 20px 20px;
-    height: 25px;
+    padding: 0;
+    margin: 20px 20px 0;
 }
 
 /**
@@ -31,10 +31,10 @@
 
 .App-light .Title {
     background-color: rgba(255, 255, 255, 0.7);
-    color: rgb(35, 33, 39);
+    color: #232127;
 }
 
 .App-dark .Title {
     background-color: rgba(0, 0, 0, 0.7);
-    color: rgb(229, 227, 232);
+    color: #e5e3e8;
 }

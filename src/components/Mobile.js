@@ -45,7 +45,7 @@ class Mobile extends React.PureComponent {
                     >
                         <Modal modal={modal} userCooldown={userCooldown} actions={actions} />
                     </div>
-                    {userInterface.title && <Header className label={userInterface.title} />}
+                    {userInterface.title && <Header label={userInterface.title} />}
 
                     {userInterface.components &&
                         userInterface.components.map(

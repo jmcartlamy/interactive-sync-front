@@ -10,6 +10,14 @@
     font-weight: normal;
 }
 
+/** 
+ * Views
+ */
+
+.VideoOverlay .Header {
+    padding: 14px;
+}
+
 /**
  * Theme
  */

@@ -16,13 +16,39 @@
 
 .Input {
     padding: 6px;
+    border: 1px #767676 solid;
+    border-radius: 2px;
 }
 
 /**
  * Views
  */
 
+.Mobile .Input-container,
+.Panel .Input-container {
+    margin: 20px 20px 0;
+    padding: 0;
+}
+
 .Mobile .Input {
     font-size: 14px;
     height: 28px;
+}
+
+/**
+ * Themes
+ */
+
+.App-light .Input {
+    background-color: #ffffff;
+    color: #232127;
+}
+
+.App-dark .Input {
+    background-color: #322f37;
+    color: #e5e3e8;
+}
+
+.App-dark .Input::placeholder {
+    color: #a5a5a5;
 }

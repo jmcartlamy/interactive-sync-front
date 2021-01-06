@@ -12,6 +12,12 @@
     min-width: 100px;
 }
 
+.Modal-components {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .Modal-close-button {
     position: absolute;
     right: 0;
@@ -52,11 +58,9 @@
 .VideoOverlay .Modal {
     width: 75%;
     max-height: 150px;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     transform: translateY(calc(100% + 20px));
     border-radius: 3px;
-    align-items: center;
 }
 
 .VideoOverlay .Modal-close-button {
@@ -73,9 +77,20 @@
     min-height: 50px;
 }
 
+.VideoOverlay .Modal-components {
+    justify-content: center;
+}
+
+.Mobile .Modal-components,
+.Panel .Modal-components {
+    flex-direction: column;
+    align-items: normal;
+}
+
 .Mobile .Modal-button,
 .Panel .Modal-button {
     min-height: 45px;
+    margin: 20px;
 }
 
 .Mobile .Modal,
@@ -85,10 +100,6 @@
     flex-direction: column;
     transform: translateY(100%);
     overflow-y: auto;
-}
-
-.Panel .Modal {
-    padding-top: 14px;
 }
 
 .VideoOverlay .Modal.Modal-open,

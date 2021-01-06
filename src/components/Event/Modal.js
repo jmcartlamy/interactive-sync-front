@@ -5,6 +5,7 @@ import { useRipple } from 'react-use-ripple';
 import cross from '../../assets/img/cross.png';
 import setAction from '../../api/setAction';
 import Title from '../UI/Title';
+import Header from '../UI/Header';
 import Input from '../UI/Input';
 
 import './Modal.css';
@@ -70,7 +71,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
 
     const Components = {
         title: Title,
-        input: Input
+        input: Input,
     };
 
     return (
@@ -83,31 +84,37 @@ const Modal = ({ modal, userCooldown, actions }) => {
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
             {actions.current && (
                 <>
-                    {actions.current.extension.components.map(
-                        ({ type, ...properties }) =>
-                            Components[type] && React.createElement(Components[type], properties)
+                    {actions.current.extension.title && (
+                        <Header label={actions.current.extension.title} />
                     )}
-                    {actions.current.extension.submit && (
-                        <button
-                            ref={rippleRef}
-                            type="button"
-                            className="Modal-button"
-                            id="modal-button"
-                            onClick={sendRequest}
-                            disabled={disabled}
-                        >
-                            {actions.current.extension.submit.label}
-                            {disabled && (
-                                <div className="Button-overlay">
-                                    {countdown && countdown > 0 && (
-                                        <span className="Button-overlay-countdown">
-                                            {countdown.toFixed(1)}
-                                        </span>
-                                    )}
-                                </div>
-                            )}
-                        </button>
-                    )}
+                    <div className="Modal-components">
+                        {actions.current.extension.components.map(
+                            ({ type, ...properties }) =>
+                                Components[type] &&
+                                React.createElement(Components[type], properties)
+                        )}
+                        {actions.current.extension.submit && (
+                            <button
+                                ref={rippleRef}
+                                type="button"
+                                className="Modal-button"
+                                id="modal-button"
+                                onClick={sendRequest}
+                                disabled={disabled}
+                            >
+                                {actions.current.extension.submit.label}
+                                {disabled && (
+                                    <div className="Button-overlay">
+                                        {countdown && countdown > 0 && (
+                                            <span className="Button-overlay-countdown">
+                                                {countdown.toFixed(1)}
+                                            </span>
+                                        )}
+                                    </div>
+                                )}
+                            </button>
+                        )}
+                    </div>
                 </>
             )}
         </div>
