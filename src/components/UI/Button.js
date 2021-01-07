@@ -7,8 +7,6 @@ import useKeydown from '../../utils/hooks/useKeydown';
 
 import './Button.css';
 
-// TODO FIX SPAM KeyCode
-
 // TODO improve source of props
 const Button = ({
     view,
@@ -84,13 +82,6 @@ const Button = ({
     };
 
     /**
-     * Set action on keydown
-     */
-    if (keyCode) {
-        useKeydown(keyCode, sendRequest);
-    }
-
-    /**
      * Countdown before enabling the button again
      */
     const scheduledTimestamp = pickMatchedActions(actions, name);
@@ -104,10 +95,18 @@ const Button = ({
         }
     }, 100);
 
-    // TODO message
-    const hasExtension = extension && extension.components && extension.components.length;
     const disabled =
         (userCooldown && userCooldown.value) || (countdown && countdown > 0) || isSending;
+
+    const hasExtension = extension && extension.components && extension.components.length;
+    const buttonOnClick = hasExtension ? openModal : sendRequest;
+
+    /**
+     * Set action on keydown
+     */
+    if (keyCode) {
+        useKeydown(keyCode, buttonOnClick, { disabled });
+    }
 
     return (
         <div key={name} className={`Button-container Button-container-${direction}`}>
@@ -116,7 +115,7 @@ const Button = ({
                 className="Button"
                 ref={rippleRef}
                 id={name}
-                onClick={hasExtension ? openModal : sendRequest}
+                onClick={buttonOnClick}
                 disabled={disabled}
             >
                 {label}

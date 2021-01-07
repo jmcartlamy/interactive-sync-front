@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 
-export default function useKeydown(code, action) {
+export default function useKeydown(code, action, options) {
     useEffect(() => {
         function onKeydown(e) {
-            if (e.code === code) {
+            if (e.code === code && !options.disabled) {
                 action();
             }
         }
         window.addEventListener('keydown', onKeydown);
         // Remove event listeners on cleanup
         return () => window.removeEventListener('keydown', onKeydown);
-    }, []); // Empty array ensures that effect is only run on mount and unmount
+    }, [options]); // Empty array ensures that effect is only run on mount and unmount
 }
