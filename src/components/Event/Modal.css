@@ -10,6 +10,7 @@
     margin: 6px 20px;
     transition: background-color 0.3s;
     min-width: 100px;
+    border-radius: 3px;
 }
 
 .Modal-components {
@@ -69,7 +70,6 @@
 
 .VideoOverlay .Modal-button {
     font-size: 14px;
-    border-radius: 3px;
     border: none;
     justify-content: center;
     align-items: center;

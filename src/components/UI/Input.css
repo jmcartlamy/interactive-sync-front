@@ -15,9 +15,10 @@
 }
 
 .Input {
-    padding: 6px;
+    padding: 6px 9px;
     border: 1px #767676 solid;
     border-radius: 2px;
+    transition: border 0.1s ease-in, background-color 0.1s ease-in;
 }
 
 /**
@@ -30,9 +31,11 @@
     padding: 0;
 }
 
-.Mobile .Input {
+.Mobile .Input,
+.Panel .Input {
     font-size: 14px;
     height: 28px;
+    border-radius: 3px;
 }
 
 /**
@@ -40,13 +43,33 @@
  */
 
 .App-light .Input {
-    background-color: #ffffff;
+    background-color: #e5e5e5;
     color: #232127;
+    border: 2px solid #e5e5e5;
+}
+
+.App-light .Input:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.App-light .Input:focus,
+.App-light .Input:focus:hover {
+    background-color: #ffffff;
 }
 
 .App-dark .Input {
     background-color: #322f37;
     color: #e5e3e8;
+    border: 2px solid #322f37;
+}
+
+.App-dark .Input:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.App-dark .Input:focus,
+.App-dark .Input:focus:hover {
+    background-color: #000000;
 }
 
 .App-dark .Input::placeholder {
