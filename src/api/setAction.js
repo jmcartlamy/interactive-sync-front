@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { logError, logSuccess } from '../utils/log';
 
-export default async function ({ view, auth, twitch, name, setMessage, setCooldownOnAction }) {
+export default async function (currentAction, formikValues) {
+    const { view, auth, twitch, name, setMessage, setCooldownOnAction } = currentAction;
     twitch.rig.log('Requesting an action', name);
     const baseRequest = auth.createRequest('POST', 'action/new');
 
@@ -10,6 +11,10 @@ export default async function ({ view, auth, twitch, name, setMessage, setCooldo
             ...baseRequest,
             data: { id: name, view },
         };
+
+        if (formikValues) {
+            request.data.values = formikValues;
+        }
 
         return axios(request)
             .then(function ({ data: actionObject, status }) {

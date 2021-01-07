@@ -1,4 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
+import { useFormik } from 'formik';
 import classNames from 'classnames';
 import { useRipple } from 'react-use-ripple';
 
@@ -18,16 +19,16 @@ const Modal = ({ modal, userCooldown, actions }) => {
      * Send request on call
      */
     const [isSending, setIsSending] = useState(false);
-    const sendRequest = () => {
+    const sendRequest = (formikValues) => {
         modal.setIsOpen(false);
-        sendRequestCallback(actions.current);
+        sendRequestCallback(actions.current, formikValues);
     };
 
     const sendRequestCallback = useCallback(
-        async (currentAction) => {
+        async (currentAction, formikValues) => {
             if (isSending) return;
             setIsSending(true);
-            await setAction(currentAction);
+            await setAction(currentAction, formikValues);
             userCooldown.set(true, 3000);
             setIsSending(false);
         },
@@ -67,6 +68,36 @@ const Modal = ({ modal, userCooldown, actions }) => {
         }
     }, 100);
 
+    /**
+     * Formik form
+     */
+
+    const InitialValuesComponents = {
+        input: '',
+    };
+
+    const initialValues = () =>
+        actions.current.extension.components.reduce((acc, { type, name }) => {
+            if (typeof InitialValuesComponents[type] !== 'undefined') {
+                acc[name] = InitialValuesComponents[type];
+            }
+            return acc;
+        }, {});
+
+    const formik =
+        actions.current &&
+        actions.current.extension &&
+        actions.current.extension.components.length &&
+        useFormik({
+            initialValues: initialValues(),
+            enableReinitialize: true,
+            onSubmit: sendRequest,
+        });
+
+    /**
+     * Render
+     */
+
     const disabled = (countdown && countdown > 0) || isSending || !modal.isOpen;
 
     const Components = {
@@ -82,40 +113,45 @@ const Modal = ({ modal, userCooldown, actions }) => {
             ref={modalRef}
         >
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
-            {actions.current && (
-                <>
+            {actions.current && actions.current.extension && (
+                <form onSubmit={formik.handleSubmit}>
                     {actions.current.extension.title && (
                         <Header label={actions.current.extension.title} />
                     )}
-                    <div className="Modal-components">
-                        {actions.current.extension.components.map(
-                            ({ type, ...properties }) =>
-                                Components[type] &&
-                                React.createElement(Components[type], properties)
-                        )}
-                        {actions.current.extension.submit && (
-                            <button
-                                ref={rippleRef}
-                                type="button"
-                                className="Modal-button"
-                                id="modal-button"
-                                onClick={sendRequest}
-                                disabled={disabled}
-                            >
-                                {actions.current.extension.submit.label}
-                                {disabled && (
-                                    <div className="Button-overlay">
-                                        {countdown && countdown > 0 && (
-                                            <span className="Button-overlay-countdown">
-                                                {countdown.toFixed(1)}
-                                            </span>
-                                        )}
-                                    </div>
+                    {actions.current.extension.components.length &&
+                        actions.current.extension.submit && (
+                            <div className="Modal-components">
+                                {actions.current.extension.components.map(
+                                    ({ type, ...properties }) =>
+                                        Components[type] &&
+                                        React.createElement(Components[type], {
+                                            ...properties,
+                                            formik,
+                                        })
                                 )}
-                            </button>
+                                {actions.current.extension.submit && (
+                                    <button
+                                        ref={rippleRef}
+                                        type="submit"
+                                        className="Modal-button"
+                                        id="modal-button"
+                                        disabled={disabled}
+                                    >
+                                        {actions.current.extension.submit.label}
+                                        {disabled && (
+                                            <div className="Button-overlay">
+                                                {countdown && countdown > 0 && (
+                                                    <span className="Button-overlay-countdown">
+                                                        {countdown.toFixed(1)}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
+                                    </button>
+                                )}
+                            </div>
                         )}
-                    </div>
-                </>
+                </form>
             )}
         </div>
     );
