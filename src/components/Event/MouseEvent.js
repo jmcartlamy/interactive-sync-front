@@ -41,7 +41,7 @@ const MouseEvent = ({ mouseInterface, auth, twitch }) => {
             if (!item.cooldown.duration || item.cooldown.duration < 1000)
                 item.cooldown.duration = 1000;
             const params = {
-                ...item,
+                type: item.type,
                 clientWidth: document.body.clientWidth,
                 clientHeight: document.body.clientHeight,
                 clientX: evt.clientX,
