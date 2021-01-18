@@ -46,6 +46,18 @@
     animation: delayZIndex 0.8s forwards;
 }
 
+.VideoOverlay-safe-top {
+    margin-top: 2.5rem;
+}
+
+.VideoOverlay-safe-right {
+    width: calc(100% - 4.65rem);
+}
+
+.VideoOverlay-safe-bottom {
+    padding: 0 0 2.5rem;
+}
+
 @keyframes delayZIndex {
     0% {
         z-index: 0;

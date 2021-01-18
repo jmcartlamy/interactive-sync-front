@@ -62,6 +62,7 @@
     flex-direction: column;
     transform: translateY(calc(100% + 20px));
     border-radius: 3px;
+    padding-bottom: 2.5rem;
 }
 
 .VideoOverlay .Modal-close-button {

@@ -26,6 +26,7 @@ class VideoOverlay extends React.PureComponent {
             title: Title,
             button: Button,
         };
+
         const props = {
             auth,
             twitch,
@@ -46,9 +47,16 @@ class VideoOverlay extends React.PureComponent {
                         <Modal modal={modal} actions={actions} userCooldown={userCooldown} />
                     </div>
 
-                    <div className="VideoOverlay-center-components">
+                    <div
+                        className={classNames(
+                            'VideoOverlay-center-components VideoOverlay-safe-top',
+                            {
+                                'VideoOverlay-safe-right': userInterface.right?.components,
+                            }
+                        )}
+                    >
                         {/* TODO improve user interface UI*/}
-                        {userInterface.left && userInterface.left.components && (
+                        {userInterface.left?.components && (
                             <div className="VideoOverlay-left-components">
                                 {userInterface.left.components.map(
                                     ({ type, ...properties }) =>
@@ -71,7 +79,7 @@ class VideoOverlay extends React.PureComponent {
                         ) : (
                             <div className="VideoOverlay-middle-components" />
                         )}
-                        {userInterface.right && userInterface.right.components && (
+                        {userInterface.right?.components && (
                             <div className="VideoOverlay-right-components">
                                 {userInterface.right.components.map(
                                     ({ type, ...properties }) =>
@@ -86,20 +94,24 @@ class VideoOverlay extends React.PureComponent {
                             </div>
                         )}
                     </div>
-                    <div className="VideoOverlay-bottom-components">
+                    <div
+                        className={classNames('VideoOverlay-bottom-components', {
+                            'VideoOverlay-safe-bottom': userInterface.bottom?.components?.find(
+                                ({ type }) => type === 'button'
+                            ),
+                        })}
+                    >
                         {/* TODO improve user interface UI*/}
-                        {userInterface.bottom &&
-                            userInterface.bottom.components &&
-                            userInterface.bottom.components.map(
-                                ({ type, ...properties }) =>
-                                    Components[type] &&
-                                    React.createElement(Components[type], {
-                                        ...properties,
-                                        ...props,
-                                        view: 'video_overlay',
-                                        direction: 'row',
-                                    })
-                            )}
+                        {userInterface.bottom?.components?.map(
+                            ({ type, ...properties }) =>
+                                Components[type] &&
+                                React.createElement(Components[type], {
+                                    ...properties,
+                                    ...props,
+                                    view: 'video_overlay',
+                                    direction: 'row',
+                                })
+                        )}
                     </div>
                 </div>
             );
