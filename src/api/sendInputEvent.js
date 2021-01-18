@@ -4,7 +4,7 @@ import { logError, logSuccess } from '../utils/log';
 export default async function (currentAction, formikValues) {
     const { view, auth, twitch, name, setMessage, setCooldownOnAction } = currentAction;
     twitch.rig.log('Requesting an action', name);
-    const baseRequest = auth.createRequest('POST', 'action/new');
+    const baseRequest = auth.createRequest('POST', 'action/input');
 
     if (baseRequest) {
         const request = {

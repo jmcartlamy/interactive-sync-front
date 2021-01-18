@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useRipple } from 'react-use-ripple';
-import setAction from '../../api/setAction';
+import sendInputEvent from '../../api/sendInputEvent';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
 import useKeydown from '../../utils/hooks/useKeydown';
@@ -52,7 +52,7 @@ const Button = ({
     const sendRequestCallback = useCallback(async () => {
         if (isSending) return;
         setIsSending(true);
-        await setAction({ view, auth, twitch, name, setMessage, setCooldownOnAction });
+        await sendInputEvent({ view, auth, twitch, name, setMessage, setCooldownOnAction });
         userCooldown.set(true, 3000);
         if (isMounted.current) {
             setIsSending(false);

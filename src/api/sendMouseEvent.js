@@ -2,7 +2,7 @@ import axios from 'axios';
 import { logError, logSuccess } from '../utils/log';
 
 export default async function (auth, twitch, params) {
-    const baseRequest = auth.createRequest('POST', 'mouse/send');
+    const baseRequest = auth.createRequest('POST', 'action/mouse');
 
     if (baseRequest) {
         const request = {

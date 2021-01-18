@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useRipple } from 'react-use-ripple';
 
 import cross from '../../assets/img/cross.png';
-import setAction from '../../api/setAction';
+import sendInputEvent from '../../api/sendInputEvent';
 import Title from '../UI/Title';
 import Header from '../UI/Header';
 import Input from '../UI/Input';
@@ -28,7 +28,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
         async (currentAction, formikValues) => {
             if (isSending) return;
             setIsSending(true);
-            await setAction(currentAction, formikValues);
+            await sendInputEvent(currentAction, formikValues);
             userCooldown.set(true, 3000);
             setIsSending(false);
         },
