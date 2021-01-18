@@ -1,5 +1,10 @@
+.html-fluid {
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
 .Panel {
-    margin: 20px 0;
+    padding: 20px 0;
 }
 
 .Panel-block {
@@ -10,7 +15,6 @@
     margin-left: 20px;
     background-color: #6441a4;
 }
-
 
 .Panel-modal {
     position: fixed;
@@ -38,3 +42,12 @@
     }
 }
 
+.App-light .Panel {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.App-dark .Panel {
+    background-color: #322f37;
+    height: 100%;
+}

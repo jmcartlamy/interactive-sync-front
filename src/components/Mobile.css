@@ -12,7 +12,6 @@
     animation: delayZIndex 0.8s forwards;
 }
 
-
 @keyframes delayZIndex {
     0% {
         z-index: 1;
@@ -23,4 +22,14 @@
     100% {
         z-index: 0;
     }
+}
+
+.App-light .Mobile {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.App-dark .Mobile {
+    background-color: #322f37;
+    height: 100%;
 }
