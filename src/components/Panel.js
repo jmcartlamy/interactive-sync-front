@@ -45,17 +45,16 @@ class Panel extends React.PureComponent {
                     >
                         <Modal modal={modal} actions={actions} userCooldown={userCooldown} />
                     </div>
-                    {userInterface.components &&
-                        userInterface.components.map(
-                            ({ type, ...properties }) =>
-                                Components[type] &&
-                                React.createElement(Components[type], {
-                                    ...properties,
-                                    ...props,
-                                    view: 'panel',
-                                    direction: 'row',
-                                })
-                        )}
+                    {userInterface.components?.map(
+                        ({ type, ...properties }) =>
+                            Components[type] &&
+                            React.createElement(Components[type], {
+                                ...properties,
+                                ...props,
+                                view: 'panel',
+                                direction: 'row',
+                            })
+                    )}
                 </div>
             );
         }

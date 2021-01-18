@@ -47,17 +47,16 @@ class Mobile extends React.PureComponent {
                     </div>
                     {userInterface.title && <Header label={userInterface.title} />}
 
-                    {userInterface.components &&
-                        userInterface.components.map(
-                            ({ type, ...properties }) =>
-                                Components[type] &&
-                                React.createElement(Components[type], {
-                                    ...properties,
-                                    ...props,
-                                    view: 'mobile',
-                                    direction: 'row',
-                                })
-                        )}
+                    {userInterface.components?.map(
+                        ({ type, ...properties }) =>
+                            Components[type] &&
+                            React.createElement(Components[type], {
+                                ...properties,
+                                ...props,
+                                view: 'mobile',
+                                direction: 'row',
+                            })
+                    )}
                 </div>
             );
         }

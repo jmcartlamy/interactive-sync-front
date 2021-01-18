@@ -85,9 +85,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
         }, {});
 
     const formik =
-        actions.current &&
-        actions.current.extension &&
-        actions.current.extension.components.length &&
+        actions.current?.extension?.components?.length &&
         useFormik({
             initialValues: initialValues(),
             enableReinitialize: true,
@@ -113,7 +111,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
             ref={modalRef}
         >
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
-            {actions.current && actions.current.extension && (
+            {actions.current?.extension && (
                 <form onSubmit={formik.handleSubmit}>
                     {actions.current.extension.title && (
                         <Header label={actions.current.extension.title} />

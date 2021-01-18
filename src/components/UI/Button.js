@@ -95,10 +95,9 @@ const Button = ({
         }
     }, 100);
 
-    const disabled =
-        (userCooldown && userCooldown.value) || (countdown && countdown > 0) || isSending;
+    const disabled = userCooldown?.value || (countdown && countdown > 0) || isSending;
 
-    const hasExtension = extension && extension.components && extension.components.length;
+    const hasExtension = extension?.components?.length;
     const buttonOnClick = hasExtension ? openModal : sendRequest;
 
     /**

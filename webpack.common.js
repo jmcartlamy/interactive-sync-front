@@ -9,7 +9,7 @@ module.exports = {
         config: './src/config.js',
         mobile: './src/mobile.js',
         video_overlay: './src/video_overlay.js',
-        authorization: './src/authorization.js'
+        authorization: './src/authorization.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -68,6 +68,9 @@ module.exports = {
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
+                    options: {
+                        plugins: ['@babel/plugin-proposal-optional-chaining'],
+                    },
                 },
             },
             {

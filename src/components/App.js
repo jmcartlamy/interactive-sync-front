@@ -63,8 +63,7 @@ class App extends React.Component {
         const payload = jsonwebtoken.decode(jwt);
         if (
             (!payload || !payload.user_id || payload.user_id.length === 0) &&
-            this.twitch &&
-            this.twitch.actions
+            this.twitch?.actions
         ) {
             Twitch.ext.actions.requestIdShare();
         }
