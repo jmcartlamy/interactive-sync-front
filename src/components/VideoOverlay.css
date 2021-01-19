@@ -43,7 +43,11 @@
 }
 
 .VideoOverlay-modal-hidden {
-    animation: delayZIndex 0.8s forwards;
+    animation: delayNegativeZIndex 0.8s forwards;
+}
+
+.VideoOverlay-top-layer {
+    z-index: 1;
 }
 
 .VideoOverlay-safe-top {
@@ -58,7 +62,7 @@
     padding: 0 0 2.5rem;
 }
 
-@keyframes delayZIndex {
+@keyframes delayNegativeZIndex {
     0% {
         z-index: 0;
     }

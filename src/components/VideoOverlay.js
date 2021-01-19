@@ -52,6 +52,7 @@ class VideoOverlay extends React.PureComponent {
                             'VideoOverlay-center-components VideoOverlay-safe-top',
                             {
                                 'VideoOverlay-safe-right': userInterface.right?.components,
+                                'VideoOverlay-top-layer': !modal.isOpen
                             }
                         )}
                     >
