@@ -76,8 +76,10 @@ const Modal = ({ modal, userCooldown, actions }) => {
         input: '',
     };
 
+    const extension = actions.current?.extension;
+
     const initialValues = () =>
-        actions.current.extension.components.reduce((acc, { type, name }) => {
+        extension.components.reduce((acc, { type, name }) => {
             if (typeof InitialValuesComponents[type] !== 'undefined') {
                 acc[name] = InitialValuesComponents[type];
             }
@@ -85,7 +87,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
         }, {});
 
     const formik =
-        actions.current?.extension?.components?.length &&
+        extension?.components?.length &&
         useFormik({
             initialValues: initialValues(),
             enableReinitialize: true,
@@ -111,44 +113,39 @@ const Modal = ({ modal, userCooldown, actions }) => {
             ref={modalRef}
         >
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
-            {actions.current?.extension && (
+            {extension && (
                 <form onSubmit={formik.handleSubmit}>
-                    {actions.current.extension.title && (
-                        <Header label={actions.current.extension.title} />
-                    )}
-                    {actions.current.extension.components.length &&
-                        actions.current.extension.submit && (
-                            <div className="Modal-components">
-                                {actions.current.extension.components.map(
-                                    ({ type, ...properties }) =>
-                                        Components[type] &&
-                                        React.createElement(Components[type], {
-                                            ...properties,
-                                            formik,
-                                        })
-                                )}
-                                {actions.current.extension.submit && (
-                                    <button
-                                        ref={rippleRef}
-                                        type="submit"
-                                        className="Modal-button"
-                                        id="modal-button"
-                                        disabled={disabled}
-                                    >
-                                        {actions.current.extension.submit.label}
-                                        {disabled && (
-                                            <div className="Button-overlay">
-                                                {countdown && countdown > 0 && (
-                                                    <span className="Button-overlay-countdown">
-                                                        {countdown.toFixed(1)}
-                                                    </span>
-                                                )}
-                                            </div>
+                    {extension.title && <Header label={extension.title} />}
+                    {extension.components?.length && extension.submit && (
+                        <div className="Modal-components">
+                            {extension.components.map(
+                                ({ type, ...properties }) =>
+                                    Components[type] &&
+                                    React.createElement(Components[type], {
+                                        ...properties,
+                                        formik,
+                                    })
+                            )}
+                            <button
+                                ref={rippleRef}
+                                type="submit"
+                                className="Modal-button"
+                                id="modal-button"
+                                disabled={disabled}
+                            >
+                                {extension.submit.label}
+                                {disabled && (
+                                    <div className="Button-overlay">
+                                        {countdown && countdown > 0 && (
+                                            <span className="Button-overlay-countdown">
+                                                {countdown.toFixed(1)}
+                                            </span>
                                         )}
-                                    </button>
+                                    </div>
                                 )}
-                            </div>
-                        )}
+                            </button>
+                        </div>
+                    )}
                 </form>
             )}
         </div>

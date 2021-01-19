@@ -22,13 +22,12 @@
     padding: 0;
     margin: 0 20px;
 }
-
-.Mobile .Title {
-    background: #322f37;
-}
-
 .App-light .VideoOverlay .Title {
     background-color: rgba(255, 255, 255, 0.7);
+}
+
+.App-dark .Mobile .Title {
+    background: #322f37;
 }
 
 .App-dark .VideoOverlay .Title {
