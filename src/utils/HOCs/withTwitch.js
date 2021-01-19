@@ -40,7 +40,7 @@ function withTwitch(WrappedComponent, view) {
 
                 twitch.listen('broadcast', (target, contentType, body) => {
                     const parseData = JSON.parse(body);
-                    if (parseData.type === 'action') {
+                    if (parseData.type === 'input') {
                         const { actionId, actionCooldown } = parseData.data;
                         this.setState({
                             actions: {
