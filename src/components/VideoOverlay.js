@@ -7,6 +7,7 @@ import Modal from './Event/Modal';
 
 import MouseEvent from './Event/MouseEvent';
 import withTwitch from '../utils/HOCs/withTwitch';
+import renderComponents from '../utils/functions/renderComponents';
 
 import './VideoOverlay.css';
 
@@ -27,7 +28,7 @@ class VideoOverlay extends React.PureComponent {
             button: Button,
         };
 
-        const props = {
+        const global = {
             auth,
             twitch,
             actions,
@@ -44,7 +45,7 @@ class VideoOverlay extends React.PureComponent {
                             'VideoOverlay-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal modal={modal} actions={actions} userCooldown={userCooldown} />
+                        <Modal global={global} />
                     </div>
 
                     <div
@@ -52,22 +53,14 @@ class VideoOverlay extends React.PureComponent {
                             'VideoOverlay-center-components VideoOverlay-safe-top',
                             {
                                 'VideoOverlay-safe-right': userInterface.right?.components,
-                                'VideoOverlay-top-layer': !modal.isOpen
+                                'VideoOverlay-top-layer': !modal.isOpen,
                             }
                         )}
                     >
-                        {/* TODO improve user interface UI*/}
                         {userInterface.left?.components && (
                             <div className="VideoOverlay-left-components">
                                 {userInterface.left.components.map(
-                                    ({ type, ...properties }) =>
-                                        Components[type] &&
-                                        React.createElement(Components[type], {
-                                            ...properties,
-                                            ...props,
-                                            view: 'video_overlay',
-                                            direction: 'column',
-                                        })
+                                    renderComponents(Components, global, 'video_overlay', 'column')
                                 )}
                             </div>
                         )}
@@ -83,14 +76,7 @@ class VideoOverlay extends React.PureComponent {
                         {userInterface.right?.components && (
                             <div className="VideoOverlay-right-components">
                                 {userInterface.right.components.map(
-                                    ({ type, ...properties }) =>
-                                        Components[type] &&
-                                        React.createElement(Components[type], {
-                                            ...properties,
-                                            ...props,
-                                            view: 'video_overlay',
-                                            direction: 'column',
-                                        })
+                                    renderComponents(Components, global, 'video_overlay', 'column')
                                 )}
                             </div>
                         )}
@@ -102,16 +88,8 @@ class VideoOverlay extends React.PureComponent {
                             ),
                         })}
                     >
-                        {/* TODO improve user interface UI*/}
                         {userInterface.bottom?.components?.map(
-                            ({ type, ...properties }) =>
-                                Components[type] &&
-                                React.createElement(Components[type], {
-                                    ...properties,
-                                    ...props,
-                                    view: 'video_overlay',
-                                    direction: 'row',
-                                })
+                            renderComponents(Components, global, 'video_overlay', 'row')
                         )}
                     </div>
                 </div>

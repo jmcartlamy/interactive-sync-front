@@ -2,15 +2,18 @@ import React from 'react';
 
 import './Input.css';
 
-const Input = ({ label, name, placeholder, formik = {} }) => {
+const Input = ({ props, formik = {} }) => {
+    const { label, name, placeholder, style } = props;
+
     return (
         <div className="Input-container">
-            <label for={name}>{label}</label>
+            {label && <label for={name}>{label}</label>}
             <input
                 type="text"
                 id={name}
                 name={name}
                 className="Input"
+                style={style}
                 maxLength="128"
                 placeholder={placeholder}
                 onChange={formik.handleChange}

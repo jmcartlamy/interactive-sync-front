@@ -7,21 +7,10 @@ import useKeydown from '../../utils/hooks/useKeydown';
 
 import './Button.css';
 
-// TODO improve source of props
-const Button = ({
-    view,
-    name,
-    label,
-    auth,
-    twitch,
-    modal,
-    actions,
-    extension,
-    userCooldown,
-    setCooldownOnAction,
-    keyCode,
-    direction = 'row',
-}) => {
+const Button = ({ global, props, view, direction = 'row' }) => {
+    const { actions, userCooldown, modal } = global;
+    const { name, label, keyCode, extension, style, cooldown } = props;
+
     /**
      * On Unmount
      */
@@ -52,7 +41,7 @@ const Button = ({
     const sendRequestCallback = useCallback(async () => {
         if (isSending) return;
         setIsSending(true);
-        await sendInputEvent({ view, auth, twitch, name, setMessage, setCooldownOnAction });
+        await sendInputEvent(global, { ...props, view, setMessage });
         userCooldown.set(true, 3000);
         if (isMounted.current) {
             setIsSending(false);
@@ -70,15 +59,7 @@ const Button = ({
      */
     const openModal = () => {
         modal.setIsOpen(true);
-        actions.setCurrent({
-            view,
-            auth,
-            twitch,
-            name,
-            setMessage,
-            setCooldownOnAction,
-            extension,
-        });
+        actions.setCurrent({ ...props, view, setMessage });
     };
 
     /**
@@ -116,14 +97,19 @@ const Button = ({
                 id={name}
                 onClick={buttonOnClick}
                 disabled={disabled}
+                style={style}
             >
-                {label}
+                <span className="Button-label">{label}</span>
                 {disabled && (
-                    <div className="Button-overlay">
+                    <div className="Button-overlay" style={cooldown?.style}>
                         {countdown && countdown > 0 && (
                             <span className="Button-overlay-countdown">{countdown.toFixed(1)}</span>
                         )}
-                        {isSending && <div className="Button-overlay-loader"></div>}
+                        {isSending && (
+                            <div className="Button-overlay-container-loader">
+                                <div className="Button-overlay-loader"></div>
+                            </div>
+                        )}
                     </div>
                 )}
             </button>

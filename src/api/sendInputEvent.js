@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { logError, logSuccess } from '../utils/log';
 
-export default async function (currentAction, formikValues) {
-    const { view, auth, twitch, name, setMessage, setCooldownOnAction } = currentAction;
+export default async function (global, currentAction, formikValues) {
+    const { auth, twitch, setCooldownOnAction } = global;
+    const { view, name, setMessage } = currentAction;
+
     twitch.rig.log('Requesting an action', name);
     const baseRequest = auth.createRequest('POST', 'action/input');
 

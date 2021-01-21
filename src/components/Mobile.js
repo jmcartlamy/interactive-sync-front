@@ -7,6 +7,8 @@ import Header from './UI/Header';
 import Modal from './Event/Modal';
 
 import withTwitch from '../utils/HOCs/withTwitch';
+import renderComponents from '../utils/functions/renderComponents';
+
 import './Mobile.css';
 
 class Mobile extends React.PureComponent {
@@ -26,7 +28,7 @@ class Mobile extends React.PureComponent {
             button: Button,
         };
 
-        const props = {
+        const global = {
             auth,
             twitch,
             actions,
@@ -37,25 +39,23 @@ class Mobile extends React.PureComponent {
 
         if (userInterface) {
             return (
-                <div className="Mobile">
+                <div className="Mobile" style={userInterface.style}>
                     <div
                         className={classNames('Mobile-modal', {
                             'Mobile-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal modal={modal} userCooldown={userCooldown} actions={actions} />
+                        <Modal global={global} />
                     </div>
-                    {userInterface.title && <Header label={userInterface.title} />}
+                    {userInterface.title?.label && (
+                        <Header
+                            label={userInterface.title.label}
+                            style={userInterface.title.style}
+                        />
+                    )}
 
                     {userInterface.components?.map(
-                        ({ type, ...properties }) =>
-                            Components[type] &&
-                            React.createElement(Components[type], {
-                                ...properties,
-                                ...props,
-                                view: 'mobile',
-                                direction: 'row',
-                            })
+                        renderComponents(Components, global, 'mobile', 'row')
                     )}
                 </div>
             );
@@ -63,7 +63,7 @@ class Mobile extends React.PureComponent {
 
         return (
             <div className="Mobile">
-                <Title label="¯\_(ツ)_/¯" />
+                <Title props={{ label: '¯\\_(ツ)_/¯' }} />
             </div>
         );
     }

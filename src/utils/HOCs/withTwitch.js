@@ -92,7 +92,7 @@ function withTwitch(WrappedComponent, view) {
 
         render() {
             if (this.state.loading) {
-                return <Title label="Loading" />;
+                return <Title props={{ label: 'Loading' }} />;
             }
 
             const actions = { ...this.props.actions, ...this.state.actions };

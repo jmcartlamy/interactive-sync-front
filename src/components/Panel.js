@@ -6,6 +6,7 @@ import Title from './UI/Title';
 import Modal from './Event/Modal';
 
 import withTwitch from '../utils/HOCs/withTwitch';
+import renderComponents from '../utils/functions/renderComponents';
 
 import './Panel.css';
 
@@ -26,7 +27,7 @@ class Panel extends React.PureComponent {
             button: Button,
         };
 
-        const props = {
+        const global = {
             auth,
             twitch,
             actions,
@@ -37,23 +38,16 @@ class Panel extends React.PureComponent {
 
         if (userInterface) {
             return (
-                <div className="Panel">
+                <div className="Panel" style={userInterface.style}>
                     <div
                         className={classNames('Panel-modal', {
                             'Panel-modal-hidden': !modal.isOpen,
                         })}
                     >
-                        <Modal modal={modal} actions={actions} userCooldown={userCooldown} />
+                        <Modal global={global} />
                     </div>
                     {userInterface.components?.map(
-                        ({ type, ...properties }) =>
-                            Components[type] &&
-                            React.createElement(Components[type], {
-                                ...properties,
-                                ...props,
-                                view: 'panel',
-                                direction: 'row',
-                            })
+                        renderComponents(Components, global, 'panel', 'row')
                     )}
                 </div>
             );
@@ -61,7 +55,7 @@ class Panel extends React.PureComponent {
 
         return (
             <div className="Panel">
-                <Title label="¯\_(ツ)_/¯" />
+                <Title props={{ label: '¯\\_(ツ)_/¯' }} />
             </div>
         );
     }

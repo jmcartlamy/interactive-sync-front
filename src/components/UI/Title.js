@@ -2,8 +2,12 @@ import React from 'react';
 
 import './Title.css';
 
-const Title = ({ label }) => {
-    return <h3 className="Title">{label}</h3>;
+const Title = ({ props: { label, style } }) => {
+    return (
+        <h3 className="Title" style={style}>
+            {label}
+        </h3>
+    );
 };
 
 export default Title;

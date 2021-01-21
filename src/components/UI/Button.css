@@ -23,6 +23,10 @@
     flex-direction: column;
 }
 
+.Button-overlay {
+    font-size: 14px;
+}
+
 .Button-overlay-loader {
     display: inline-block;
     border-radius: 50%;
@@ -32,10 +36,6 @@
     animation: spin 0.8s linear infinite;
     border: 3px solid #666666;
     border-top: 3px solid #f3f3f3;
-}
-
-.Button-overlay-countdown {
-    font-size: 14px;
 }
 
 .Button:hover:enabled,
@@ -164,10 +164,6 @@
     border: none;
 }
 
-.VideoOverlay .Button > * {
-    margin-top: 5px;
-}
-
 .VideoOverlay .Button .Button-overlay,
 .Modal .Modal-button .Button-overlay {
     display: flex;
@@ -188,13 +184,44 @@
     align-items: center;
     height: 45px;
     margin: 14px 20px 0;
+    padding: 0;
 }
 
 .Mobile .Button {
     align-items: center;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     width: 100%;
     border: none;
     height: 65px;
+}
+
+.Panel .Button .Button-overlay,
+.Mobile .Button .Button-overlay {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.Panel .Button .Button-label {
+    padding-left: 14px;
+}
+
+.Panel .Button .Button-overlay-countdown,
+.Panel .Button .Button-overlay-container-loader {
+    padding-right: 14px;
+}
+
+.Panel .Button .Button-overlay-container-loader,
+.Mobile .Button .Button-overlay-container-loader {
+    display: flex;
+}
+
+.Mobile .Button .Button-label {
+    padding-left: 20px;
+}
+
+.Mobile .Button .Button-overlay-countdown,
+.Mobile .Button .Button-overlay-container-loader {
+    padding-right: 20px;
 }

@@ -14,7 +14,8 @@ import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
 
-const Modal = ({ modal, userCooldown, actions }) => {
+const Modal = ({ global }) => {
+    const { modal, userCooldown, actions } = global;
     /**
      * Send request on call
      */
@@ -28,7 +29,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
         async (currentAction, formikValues) => {
             if (isSending) return;
             setIsSending(true);
-            await sendInputEvent(currentAction, formikValues);
+            await sendInputEvent(global, currentAction, formikValues);
             userCooldown.set(true, 3000);
             setIsSending(false);
         },
@@ -110,19 +111,22 @@ const Modal = ({ modal, userCooldown, actions }) => {
             className={classNames('Modal', {
                 'Modal-open': modal.isOpen,
             })}
+            style={extension?.style}
             ref={modalRef}
         >
             <img className="Modal-close-button" src={cross} onClick={closeModal} />
             {extension && (
                 <form onSubmit={formik.handleSubmit}>
-                    {extension.title && <Header label={extension.title} />}
+                    {extension.title?.label && (
+                        <Header label={extension.title.label} style={extension.title.style} />
+                    )}
                     {extension.components?.length && extension.submit && (
                         <div className="Modal-components">
                             {extension.components.map(
-                                ({ type, ...properties }) =>
+                                ({ type, ...props }) =>
                                     Components[type] &&
                                     React.createElement(Components[type], {
-                                        ...properties,
+                                        props,
                                         formik,
                                     })
                             )}
@@ -131,6 +135,7 @@ const Modal = ({ modal, userCooldown, actions }) => {
                                 type="submit"
                                 className="Modal-button"
                                 id="modal-button"
+                                style={extension.submit.style}
                                 disabled={disabled}
                             >
                                 {extension.submit.label}
