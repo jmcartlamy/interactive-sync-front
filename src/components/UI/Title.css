@@ -34,6 +34,11 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.App-light .VideoOverlay .Title.Title-transparent,
+.App-dark .VideoOverlay .Title.Title-transparent {
+    background: none;
+}
+
 /**
  * Theme
  */

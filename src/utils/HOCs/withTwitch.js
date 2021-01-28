@@ -14,6 +14,7 @@ function withTwitch(WrappedComponent, view) {
 
             this.state = {
                 userInterface: null,
+                configUI: {},
                 actions: null,
                 loading: false,
                 userIsInCooldown: false,
@@ -26,9 +27,10 @@ function withTwitch(WrappedComponent, view) {
             if (twitch) {
                 this.setState({ loading: true });
                 const userInterface = await getUserInterface(auth, twitch);
-                if (userInterface && userInterface[view]) {
+                if (userInterface) {
                     this.setState({
-                        userInterface: userInterface[view],
+                        userInterface: userInterface[view] || null,
+                        configUI: userInterface.config || {},
                     });
                 }
 
@@ -51,7 +53,8 @@ function withTwitch(WrappedComponent, view) {
                     } else if (parseData.type === 'user_interface') {
                         twitch.rig.log('Received broadcast user_interface', parseData.data);
                         this.setState({
-                            userInterface: parseData.data[view],
+                            userInterface: (parseData.data && parseData.data[view]) || null,
+                            configUI: parseData.data?.config || {},
                         });
                     }
                 });
@@ -96,13 +99,14 @@ function withTwitch(WrappedComponent, view) {
             }
 
             const actions = { ...this.props.actions, ...this.state.actions };
-            const { userInterface, userIsInCooldown } = this.state;
+            const { userInterface, userIsInCooldown, configUI } = this.state;
             const userCooldown = { set: this.setCooldownForUser, value: userIsInCooldown };
 
             return (
                 <WrappedComponent
                     {...this.props}
                     userInterface={userInterface}
+                    configUI={configUI}
                     actions={actions}
                     userCooldown={userCooldown}
                     setCooldownOnAction={this.setCooldownOnAction}

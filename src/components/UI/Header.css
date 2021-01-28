@@ -32,3 +32,9 @@
     background: #322f37;
     border-bottom: 2px solid #2b2a32;
 }
+
+.App-light .Header-transparent,
+.App-dark .Header-transparent {
+    background: none;
+    border-bottom: none;
+}

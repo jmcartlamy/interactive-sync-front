@@ -17,6 +17,7 @@ class Mobile extends React.PureComponent {
             auth,
             twitch,
             userInterface,
+            configUI,
             actions,
             userCooldown,
             setCooldownOnAction,
@@ -35,6 +36,7 @@ class Mobile extends React.PureComponent {
             userCooldown,
             setCooldownOnAction,
             modal,
+            configUI,
         };
 
         if (userInterface) {
@@ -51,12 +53,14 @@ class Mobile extends React.PureComponent {
                         <Header
                             label={userInterface.title.label}
                             style={userInterface.title.style}
+                            transparent={configUI.transparent}
                         />
                     )}
-
-                    {userInterface.components?.map(
-                        renderComponents(Components, global, 'mobile', 'row')
-                    )}
+                    <div className={classNames({ 'Mobile-top-layer': !modal.isOpen })}>
+                        {userInterface.components?.map(
+                            renderComponents(Components, global, 'mobile', 'row')
+                        )}
+                    </div>
                 </div>
             );
         }

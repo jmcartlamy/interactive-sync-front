@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useRipple } from 'react-use-ripple';
+import classNames from 'classnames';
+
 import sendInputEvent from '../../api/sendInputEvent';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
@@ -8,7 +10,7 @@ import useKeydown from '../../utils/hooks/useKeydown';
 import './Button.css';
 
 const Button = ({ global, props, view, direction = 'row' }) => {
-    const { actions, userCooldown, modal } = global;
+    const { actions, userCooldown, modal, configUI } = global;
     const { name, label, keyCode, extension, style, cooldown } = props;
 
     /**
@@ -52,7 +54,9 @@ const Button = ({ global, props, view, direction = 'row' }) => {
      * Ripple on button
      */
     const rippleRef = useRef();
-    useRipple(rippleRef);
+    useRipple(rippleRef, {
+        disabled: !configUI.ripple,
+    });
 
     /**
      * Open modal
@@ -92,7 +96,9 @@ const Button = ({ global, props, view, direction = 'row' }) => {
         <div key={name} className={`Button-container Button-container-${direction}`}>
             <button
                 type="button"
-                className="Button"
+                className={classNames('Button', {
+                    'Button-transparent': configUI.transparent,
+                })}
                 ref={rippleRef}
                 id={name}
                 onClick={buttonOnClick}

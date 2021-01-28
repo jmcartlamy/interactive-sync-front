@@ -1,10 +1,11 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import './Header.css';
 
-const Header = ({ label, style }) => {
+const Header = ({ label, transparent, style }) => {
     return (
-        <h3 className="Header" style={style}>
+        <h3 className={classNames('Header', { 'Header-transparent': transparent })} style={style}>
             {label}
         </h3>
     );

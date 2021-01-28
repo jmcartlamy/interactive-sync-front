@@ -4,6 +4,7 @@
 }
 
 .Modal-button {
+    position: relative;
     display: flex;
     justify-content: center;
     padding: 14px;
@@ -50,6 +51,11 @@
 
 .App-dark .Modal-button {
     border: 1px solid #2b2a32;
+}
+
+.App-light .Modal-transparent,
+.App-dark .Modal-transparent {
+    background: none;
 }
 
 /**
@@ -106,6 +112,6 @@
 .VideoOverlay .Modal.Modal-open,
 .Mobile .Modal.Modal-open,
 .Panel .Modal.Modal-open {
-    z-index: initial;
+    z-index: 8;
     transform: translateY(0);
 }

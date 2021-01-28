@@ -3,6 +3,7 @@
  */
 
 .Button {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 14px;
@@ -151,6 +152,46 @@
 
 .App-dark .Panel .Button {
     border: 1px solid #2b2a32;
+}
+
+.App-light .Button.Button-transparent,
+.App-dark .Button.Button-transparent,
+.App-light .Button.Button-transparent:hover:enabled,
+.App-light .Button.Button-transparent:focus:enabled,
+.App-dark .Button.Button-transparent:hover:enabled,
+.App-dark .Button.Button-transparent:focus:enabled {
+    background: none;
+}
+
+.App-light .Modal-button.Modal-button-transparent,
+.App-dark .Modal-button.Modal-button-transparent,
+.App-light .Modal-button.Modal-button-transparent:hover:enabled,
+.App-light .Modal-button.Modal-button-transparent:focus:enabled,
+.App-light .Modal-button.Modal-button-transparent:disabled,
+.App-light .Modal-button.Modal-button-transparent[disabled],
+.App-dark .Modal-button.Modal-button-transparent:hover:enabled,
+.App-dark .Modal-button.Modal-button-transparent:focus:enabled,
+.App-dark .Modal-button.Modal-button-transparent:disabled,
+.App-dark .Modal-button.Modal-button-transparent[disabled] {
+    background: none;
+}
+
+.App-light .Mobile .Button.Button-transparent:disabled,
+.App-light .Mobile .Button.Button-transparent[disabled],
+.App-light .Panel .Button.Button-transparent:disabled,
+.App-light .Panel .Button.Button-transparent[disabled],
+.App-light .Modal-button.Button-transparent:disabled,
+.App-light .Modal-button.Button-transparent[disabled] {
+    background: none;
+}
+
+.App-dark .Mobile .Button.Button-transparent:disabled,
+.App-dark .Mobile .Button.Button-transparent[disabled],
+.App-dark .Panel .Button.Button-transparent:disabled,
+.App-dark .Panel .Button.Button-transparent[disabled],
+.App-dark .Modal-button.Button-transparent:disabled,
+.App-dark .Modal-button.Button-transparent[disabled] {
+    background: none;
 }
 
 /**

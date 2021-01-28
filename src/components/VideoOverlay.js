@@ -18,6 +18,7 @@ class VideoOverlay extends React.PureComponent {
             twitch,
             modal,
             userInterface,
+            configUI,
             actions,
             userCooldown,
             setCooldownOnAction,
@@ -35,6 +36,7 @@ class VideoOverlay extends React.PureComponent {
             userCooldown,
             setCooldownOnAction,
             modal,
+            configUI,
         };
 
         if (userInterface) {

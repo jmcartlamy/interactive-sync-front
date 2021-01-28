@@ -1,10 +1,10 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import './Input.css';
 
-const Input = ({ props, formik = {} }) => {
+const Input = ({ global = {}, props, formik = {} }) => {
     const { label, name, placeholder, style } = props;
-
     return (
         <div className="Input-container">
             {label && <label for={name}>{label}</label>}
@@ -12,7 +12,9 @@ const Input = ({ props, formik = {} }) => {
                 type="text"
                 id={name}
                 name={name}
-                className="Input"
+                className={classNames('Input', {
+                    'Input-transparent': global.configUI?.transparent,
+                })}
                 style={style}
                 maxLength="128"
                 placeholder={placeholder}

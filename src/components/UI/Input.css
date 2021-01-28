@@ -75,3 +75,14 @@
 .App-dark .Input::placeholder {
     color: #a5a5a5;
 }
+
+.App-light .Input.Input-transparent,
+.App-light .Input.Input-transparent:hover,
+.App-light .Input.Input-transparent:focus,
+.App-light .Input.Input-transparent:focus:hover,
+.App-dark .Input.Input-transparent,
+.App-dark .Input.Input-transparent:hover,
+.App-dark .Input.Input-transparent:focus,
+.App-dark .Input.Input-transparent:focus:hover {
+    background: none;
+}

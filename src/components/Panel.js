@@ -16,6 +16,7 @@ class Panel extends React.PureComponent {
             auth,
             twitch,
             userInterface,
+            configUI,
             actions,
             userCooldown,
             setCooldownOnAction,
@@ -34,6 +35,7 @@ class Panel extends React.PureComponent {
             userCooldown,
             setCooldownOnAction,
             modal,
+            configUI,
         };
 
         if (userInterface) {
@@ -46,9 +48,11 @@ class Panel extends React.PureComponent {
                     >
                         <Modal global={global} />
                     </div>
-                    {userInterface.components?.map(
-                        renderComponents(Components, global, 'panel', 'row')
-                    )}
+                    <div className={classNames({ 'Panel-top-layer': !modal.isOpen })}>
+                        {userInterface.components?.map(
+                            renderComponents(Components, global, 'panel', 'row')
+                        )}
+                    </div>
                 </div>
             );
         }

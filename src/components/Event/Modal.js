@@ -15,7 +15,7 @@ import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
 
 const Modal = ({ global }) => {
-    const { modal, userCooldown, actions } = global;
+    const { modal, userCooldown, actions, configUI } = global;
     /**
      * Send request on call
      */
@@ -47,7 +47,7 @@ const Modal = ({ global }) => {
      * Ripple on button
      */
     const rippleRef = useRef();
-    useRipple(rippleRef);
+    useRipple(rippleRef, { disabled: !configUI.ripple });
 
     /**
      * Body scroll lock on open
@@ -110,6 +110,7 @@ const Modal = ({ global }) => {
         <div
             className={classNames('Modal', {
                 'Modal-open': modal.isOpen,
+                'Modal-transparent': configUI.transparent,
             })}
             style={extension?.style}
             ref={modalRef}
@@ -118,7 +119,11 @@ const Modal = ({ global }) => {
             {extension && (
                 <form onSubmit={formik.handleSubmit}>
                     {extension.title?.label && (
-                        <Header label={extension.title.label} style={extension.title.style} />
+                        <Header
+                            label={extension.title.label}
+                            style={extension.title.style}
+                            transparent={configUI.transparent}
+                        />
                     )}
                     {extension.components?.length && extension.submit && (
                         <div className="Modal-components">
@@ -126,6 +131,7 @@ const Modal = ({ global }) => {
                                 ({ type, ...props }) =>
                                     Components[type] &&
                                     React.createElement(Components[type], {
+                                        global,
                                         props,
                                         formik,
                                     })
@@ -133,7 +139,9 @@ const Modal = ({ global }) => {
                             <button
                                 ref={rippleRef}
                                 type="submit"
-                                className="Modal-button"
+                                className={classNames('Modal-button', {
+                                    'Modal-button-transparent': configUI.transparent,
+                                })}
                                 id="modal-button"
                                 style={extension.submit.style}
                                 disabled={disabled}
