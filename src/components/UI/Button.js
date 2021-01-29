@@ -63,7 +63,7 @@ const Button = ({ global, props, view, direction = 'row' }) => {
      */
     const openModal = () => {
         modal.setIsOpen(true);
-        actions.setCurrent({ ...props, view, setMessage });
+        actions.setCurrent({ ...props, view, setMessage, isSending, setIsSending });
     };
 
     /**

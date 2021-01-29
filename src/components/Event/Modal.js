@@ -19,7 +19,7 @@ const Modal = ({ global }) => {
     /**
      * Send request on call
      */
-    const [isSending, setIsSending] = useState(false);
+    const { isSending, setIsSending } = actions.current || {};
     const sendRequest = (formikValues) => {
         modal.setIsOpen(false);
         sendRequestCallback(actions.current, formikValues);
