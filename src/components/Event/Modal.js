@@ -3,16 +3,16 @@ import { useFormik } from 'formik';
 import classNames from 'classnames';
 import { useRipple } from 'react-use-ripple';
 
-import cross from '../../assets/img/cross.png';
 import sendInputEvent from '../../api/sendInputEvent';
 import Title from '../UI/Title';
 import Header from '../UI/Header';
 import Input from '../UI/Input';
 
-import './Modal.css';
 import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
+
+import './Modal.css';
 
 const Modal = ({ global }) => {
     const { modal, userCooldown, actions, configUI } = global;
@@ -115,7 +115,7 @@ const Modal = ({ global }) => {
             style={extension?.style}
             ref={modalRef}
         >
-            <img className="Modal-close-button" src={cross} onClick={closeModal} />
+            <div className="Modal-close-button" onClick={closeModal} />
             {extension && (
                 <form onSubmit={formik.handleSubmit}>
                     {extension.title?.label && (

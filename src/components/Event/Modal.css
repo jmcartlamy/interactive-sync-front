@@ -24,8 +24,28 @@
     position: absolute;
     right: 0;
     top: 0;
-    padding: 10px;
+    width: 26px;
+    height: 26px;
+    padding: 12px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.Modal-close-button:before,
+.Modal-close-button:after {
+    position: absolute;
+    left: 24px;
+    content: ' ';
+    height: 26px;
+    width: 2px;
+}
+
+.Modal-close-button:before {
+    transform: rotate(45deg);
+}
+
+.Modal-close-button:after {
+    transform: rotate(-45deg);
 }
 
 .Modal-button:hover:enabled,
@@ -53,6 +73,28 @@
     border: 1px solid #2b2a32;
 }
 
+.App-light .Modal-close-button:before,
+.App-light .Modal-close-button:after {
+    background-color: #333;
+}
+
+.App-dark .Modal-close-button:before,
+.App-dark .Modal-close-button:after {
+    background-color: #e5e3e8;
+}
+
+.App-light .Modal-close-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.App-dark .Modal-close-button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.App-dark .VideoOverlay .Modal-close-button:hover {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
 .App-light .Modal-transparent,
 .App-dark .Modal-transparent {
     background: none;
@@ -69,10 +111,6 @@
     transform: translateY(calc(100% + 20px));
     border-radius: 3px;
     padding-bottom: 2.5rem;
-}
-
-.VideoOverlay .Modal-close-button {
-    transform: translate(20px, -20px);
 }
 
 .VideoOverlay .Modal-button {
@@ -114,4 +152,10 @@
 .Panel .Modal.Modal-open {
     z-index: 8;
     transform: translateY(0);
+}
+
+.Mobile .Modal-close-button,
+.Panel .Modal-close-button {
+    border-radius: 50%;
+    transform: translate(-2px, 6px);
 }

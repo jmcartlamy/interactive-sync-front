@@ -23,7 +23,7 @@
     margin: 0 20px;
 }
 .App-light .VideoOverlay .Title {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #efefef;
 }
 
 .App-dark .Mobile .Title {
@@ -31,7 +31,7 @@
 }
 
 .App-dark .VideoOverlay .Title {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: #212026;
 }
 
 .App-light .VideoOverlay .Title.Title-transparent,
