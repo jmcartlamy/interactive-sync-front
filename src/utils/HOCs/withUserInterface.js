@@ -113,6 +113,14 @@ function withUserInterface(WrappedComponent) {
             });
         }
 
+        setForceTheme() {
+            const { configUI } = this.state;
+            if (configUI.forceTheme) {
+                return configUI.forceTheme === 'light' ? 'App-light' : 'App-dark';
+            }
+            return this.props.theme === 'light' ? 'App-light' : 'App-dark';
+        }
+
         render() {
             if (this.state.loading) {
                 return <Title props={{ label: 'Loading' }} />;
@@ -131,15 +139,17 @@ function withUserInterface(WrappedComponent) {
             const { userInterface, configUI } = this.state;
 
             return (
-                <WrappedComponent
-                    {...this.props}
-                    userInterface={userInterface}
-                    configUI={configUI}
-                    modal={modal}
-                    actions={actions}
-                    userCooldown={userCooldown}
-                    setCooldownOnAction={this.setCooldownOnAction}
-                />
+                <div className={this.setForceTheme()}>
+                    <WrappedComponent
+                        {...this.props}
+                        userInterface={userInterface}
+                        configUI={configUI}
+                        modal={modal}
+                        actions={actions}
+                        userCooldown={userCooldown}
+                        setCooldownOnAction={this.setCooldownOnAction}
+                    />
+                </div>
             );
         }
     }

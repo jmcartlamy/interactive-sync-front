@@ -93,7 +93,9 @@ class App extends React.Component {
         const Component = Components[view];
 
         if (Component) {
-            return <Component twitch={this.twitch} auth={auth} view={view} />;
+            return (
+                <Component twitch={this.twitch} auth={auth} view={view} theme={this.state.theme} />
+            );
         }
 
         return null;
@@ -103,11 +105,7 @@ class App extends React.Component {
         const { finishedLoading, isVisible } = this.state;
 
         if (finishedLoading && isVisible) {
-            return (
-                <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'}>
-                    {this.renderView()}
-                </div>
-            );
+            return this.renderView();
         } else {
             return <div></div>;
         }
