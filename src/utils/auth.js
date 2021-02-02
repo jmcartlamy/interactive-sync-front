@@ -1,7 +1,5 @@
-import React from 'react';
-
 /**
- * Helpers with HOC for authentication against EBS service.
+ * Helpers for authentication against EBS service.
  * Allows the storage of a token to be accessed across components.
  */
 
@@ -47,19 +45,4 @@ const auth = {
     },
 };
 
-function withAuth(WrappedComponent) {
-    class withAuth extends React.PureComponent {
-        render() {
-            return <WrappedComponent auth={auth} {...this.props} />;
-        }
-    }
-
-    // For better debugging
-    withAuth.displayName = `WithAuth(${
-        WrappedComponent.displayName || WrappedComponent.name || 'Component'
-    })`;
-
-    return withAuth;
-}
-
-export default withAuth;
+export default auth;

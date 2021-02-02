@@ -1,12 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Button from './UI/Button';
-import Title from './UI/Title';
-import Modal from './Event/Modal';
+import Button from '../UI/Button';
+import Title from '../UI/Title';
+import Modal from '../Event/Modal';
 
-import withTwitch from '../utils/HOCs/withTwitch';
-import renderComponents from '../utils/functions/renderComponents';
+import withUserInterface from '../../utils/HOCs/withUserInterface';
+import renderComponents from '../../utils/functions/renderComponents';
 
 import './Panel.css';
 
@@ -65,4 +65,4 @@ class Panel extends React.PureComponent {
     }
 }
 
-export default withTwitch(Panel, 'panel');
+export default withUserInterface(Panel);

@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Button from './UI/Button';
-import Title from './UI/Title';
-import Header from './UI/Header';
-import Modal from './Event/Modal';
+import Button from '../UI/Button';
+import Title from '../UI/Title';
+import Header from '../UI/Header';
+import Modal from '../Event/Modal';
 
-import withTwitch from '../utils/HOCs/withTwitch';
-import renderComponents from '../utils/functions/renderComponents';
+import withUserInterface from '../../utils/HOCs/withUserInterface';
+import renderComponents from '../../utils/functions/renderComponents';
 
 import './Mobile.css';
 
@@ -73,4 +73,4 @@ class Mobile extends React.PureComponent {
     }
 }
 
-export default withTwitch(Mobile, 'mobile');
+export default withUserInterface(Mobile);

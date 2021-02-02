@@ -4,13 +4,15 @@ import getUserInterface from '../../api/getUserInterface';
 import getAllActions from '../../api/getAllActions';
 import Title from '../../components/UI/Title';
 
-function withTwitch(WrappedComponent, view) {
-    class withTwitch extends React.Component {
+function withUserInterface(WrappedComponent) {
+    class withUserInterface extends React.Component {
         constructor(props) {
             super(props);
 
             this.setCooldownForUser = this.setCooldownForUser.bind(this);
             this.setCooldownOnAction = this.setCooldownOnAction.bind(this);
+            this.setModalIsOpen = this.setModalIsOpen.bind(this);
+            this.setCurrentAction = this.setCurrentAction.bind(this);
 
             this.state = {
                 userInterface: null,
@@ -18,11 +20,13 @@ function withTwitch(WrappedComponent, view) {
                 actions: null,
                 loading: false,
                 userIsInCooldown: false,
+                modalIsOpen: false,
+                currentAction: null,
             };
         }
 
         async componentDidMount() {
-            const { auth, twitch } = this.props;
+            const { auth, twitch, view } = this.props;
 
             if (twitch) {
                 this.setState({ loading: true });
@@ -69,6 +73,22 @@ function withTwitch(WrappedComponent, view) {
             }
         }
 
+        setModalIsOpen(modalIsOpen) {
+            this.setState(() => {
+                return {
+                    modalIsOpen,
+                };
+            });
+        }
+
+        setCurrentAction(currentAction) {
+            this.setState(() => {
+                return {
+                    currentAction,
+                };
+            });
+        }
+
         setCooldownForUser(boolean, cooldown) {
             this.setState({
                 userIsInCooldown: boolean,
@@ -98,15 +118,24 @@ function withTwitch(WrappedComponent, view) {
                 return <Title props={{ label: 'Loading' }} />;
             }
 
-            const actions = { ...this.props.actions, ...this.state.actions };
-            const { userInterface, userIsInCooldown, configUI } = this.state;
-            const userCooldown = { set: this.setCooldownForUser, value: userIsInCooldown };
+            const modal = { isOpen: this.state.modalIsOpen, setIsOpen: this.setModalIsOpen };
+            const actions = {
+                current: this.state.currentAction,
+                setCurrent: this.setCurrentAction,
+                ...this.state.actions,
+            };
+            const userCooldown = {
+                set: this.setCooldownForUser,
+                value: this.state.userIsInCooldown,
+            };
+            const { userInterface, configUI } = this.state;
 
             return (
                 <WrappedComponent
                     {...this.props}
                     userInterface={userInterface}
                     configUI={configUI}
+                    modal={modal}
                     actions={actions}
                     userCooldown={userCooldown}
                     setCooldownOnAction={this.setCooldownOnAction}
@@ -116,11 +145,11 @@ function withTwitch(WrappedComponent, view) {
     }
 
     // For better debugging
-    withTwitch.displayName = `WithTwitch(${
+    withUserInterface.displayName = `WithUserInterface(${
         WrappedComponent.displayName || WrappedComponent.name || 'Component'
     })`;
 
-    return withTwitch;
+    return withUserInterface;
 }
 
-export default withTwitch;
+export default withUserInterface;

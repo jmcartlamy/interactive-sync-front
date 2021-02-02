@@ -1,19 +1,17 @@
 import React from 'react';
 import jsonwebtoken from 'jsonwebtoken';
 
-import withAuth from '../utils/HOCs/withAuth';
-import Panel from './Panel';
-import VideoOverlay from './VideoOverlay';
-import Mobile from './Mobile';
+import Panel from './Views/Panel';
+import VideoOverlay from './Views/VideoOverlay';
+import Mobile from './Views/Mobile';
+
+import auth from '../utils/auth';
 
 import './App.css';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-
-        this.setModalIsOpen = this.setModalIsOpen.bind(this);
-        this.setCurrentAction = this.setCurrentAction.bind(this);
 
         // If the extension is running on twitch or dev rig,
         // set the shorthand here, otherwise set to null
@@ -22,22 +20,19 @@ class App extends React.Component {
             finishedLoading: false,
             theme: 'light',
             isVisible: true,
-            isAuthorize: false,
-            modalIsOpen: false,
-            currentAction: null,
         };
     }
 
     componentDidMount() {
         if (this.twitch) {
-            this.twitch.onAuthorized((auth) => {
-                if (auth) {
-                    if (auth.token) {
+            this.twitch.onAuthorized((authorized) => {
+                if (authorized) {
+                    if (authorized.token) {
                         // Request permission and reload extension if user accept
-                        this.requestTwitchUserIdShare(auth.token);
+                        this.requestTwitchUserIdShare(authorized.token);
                     }
                     // Set user auth
-                    this.props.auth.setUserAuth(auth);
+                    auth.setUserAuth(authorized);
                 }
 
                 // if we've not set up after getting a token, let's set it up now.
@@ -87,26 +82,8 @@ class App extends React.Component {
         });
     }
 
-    setModalIsOpen(modalIsOpen) {
-        this.setState(() => {
-            return {
-                modalIsOpen,
-            };
-        });
-    }
-
-    setCurrentAction(currentAction) {
-        this.setState(() => {
-            return {
-                currentAction,
-            };
-        });
-    }
-
     renderView() {
-        const { view, auth } = this.props;
-        const modal = { isOpen: this.state.modalIsOpen, setIsOpen: this.setModalIsOpen };
-        const actions = { current: this.state.currentAction, setCurrent: this.setCurrentAction };
+        const { view } = this.props;
 
         const Components = {
             panel: Panel,
@@ -116,14 +93,14 @@ class App extends React.Component {
         const Component = Components[view];
 
         if (Component) {
-            return <Component twitch={this.twitch} auth={auth} modal={modal} actions={actions} />;
+            return <Component twitch={this.twitch} auth={auth} view={view} />;
         }
 
         return null;
     }
 
     render() {
-        const { finishedLoading, isVisible, isAuthorize } = this.state;
+        const { finishedLoading, isVisible } = this.state;
 
         if (finishedLoading && isVisible) {
             return (
@@ -137,4 +114,4 @@ class App extends React.Component {
     }
 }
 
-export default withAuth(App);
+export default App;

@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import Button from './UI/Button';
-import Title from './UI/Title';
-import Modal from './Event/Modal';
+import Button from '../UI/Button';
+import Title from '../UI/Title';
+import Modal from '../Event/Modal';
 
-import MouseEvent from './Event/MouseEvent';
-import withTwitch from '../utils/HOCs/withTwitch';
-import renderComponents from '../utils/functions/renderComponents';
+import MouseEvent from '../Event/MouseEvent';
+import withUserInterface from '../../utils/HOCs/withUserInterface';
+import renderComponents from '../../utils/functions/renderComponents';
 
 import './VideoOverlay.css';
 
@@ -101,4 +101,4 @@ class VideoOverlay extends React.PureComponent {
     }
 }
 
-export default withTwitch(VideoOverlay, 'video_overlay');
+export default withUserInterface(VideoOverlay);
