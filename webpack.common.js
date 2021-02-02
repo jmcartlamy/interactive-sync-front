@@ -9,7 +9,6 @@ module.exports = {
         config: './src/config.js',
         mobile: './src/mobile.js',
         video_overlay: './src/video_overlay.js',
-        authorization: './src/authorization.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -53,11 +52,6 @@ module.exports = {
             filename: 'video_overlay.html',
             template: 'src/assets/html/video_overlay.html',
             chunks: ['video_overlay'],
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'authorization.html',
-            template: 'src/assets/html/authorization.html',
-            chunks: ['authorization'],
         }),
         new MiniCssExtractPlugin(),
     ],
