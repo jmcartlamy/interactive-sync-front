@@ -30,7 +30,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 125px;
+    width: 300px;
 }
 
 .VideoOverlay-modal {

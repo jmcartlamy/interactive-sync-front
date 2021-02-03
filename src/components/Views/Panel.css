@@ -3,10 +3,6 @@
     height: calc(100% - 40px);
 }
 
-.Panel {
-    padding: 20px 0;
-}
-
 .Panel-block {
     border-radius: 4px;
     transition: background-color 0.5s ease;
@@ -31,6 +27,7 @@
 
 .Panel-top-layer {
     position: relative;
+    padding: 20px 0;
     z-index: 1;
 }
 

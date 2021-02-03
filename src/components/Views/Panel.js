@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import Button from '../UI/Button';
 import Title from '../UI/Title';
+import Image from '../UI/Image';
 import Modal from '../Event/Modal';
 
 import withUserInterface from '../../utils/HOCs/withUserInterface';
@@ -25,6 +26,7 @@ class Panel extends React.PureComponent {
 
         const Components = {
             title: Title,
+            image: Image,
             button: Button,
         };
 

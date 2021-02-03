@@ -1,0 +1,35 @@
+/**
+ * General
+ */
+
+.Image {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/**
+ * Views
+ */
+
+.VideoOverlay .Image {
+    width: fit-content;
+    height: fit-content;
+}
+
+.Mobile .Image,
+.Panel .Image {
+    width: auto;
+    height: auto;
+}
+
+.VideoOverlay .Modal .Image {
+    width: auto;
+    height: auto;
+    max-height: 150px;
+}
+
+.Mobile .Modal .Image,
+.Panel .Modal .Image {
+    max-height: 100%;
+    margin: auto;
+}

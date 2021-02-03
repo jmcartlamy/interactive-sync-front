@@ -205,6 +205,14 @@
     border: none;
 }
 
+.VideoOverlay-left-components .Button-container {
+    align-items: flex-start;
+}
+
+.VideoOverlay-right-components .Button-container {
+    align-items: flex-end;
+}
+
 .VideoOverlay .Button .Button-overlay,
 .Modal .Modal-button .Button-overlay {
     display: flex;

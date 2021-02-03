@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import Button from '../UI/Button';
 import Title from '../UI/Title';
+import Image from '../UI/Image';
 import Modal from '../Event/Modal';
 
 import MouseEvent from '../Event/MouseEvent';
@@ -26,6 +27,7 @@ class VideoOverlay extends React.PureComponent {
 
         const Components = {
             title: Title,
+            image: Image,
             button: Button,
         };
 
