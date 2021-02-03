@@ -8,6 +8,7 @@ import Title from '../UI/Title';
 import Header from '../UI/Header';
 import Input from '../UI/Input';
 import Image from '../UI/Image';
+import Text from '../UI/Text';
 
 import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
@@ -105,7 +106,8 @@ const Modal = ({ global }) => {
     const Components = {
         title: Title,
         input: Input,
-        image: Image
+        image: Image,
+        text: Text,
     };
 
     return (

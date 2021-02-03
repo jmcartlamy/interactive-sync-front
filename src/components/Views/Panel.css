@@ -25,9 +25,12 @@
     animation: delayZIndex 0.8s forwards;
 }
 
+.Panel-padding {
+    padding: 20px 0;
+}
+
 .Panel-top-layer {
     position: relative;
-    padding: 20px 0;
     z-index: 1;
 }
 

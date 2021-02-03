@@ -5,6 +5,7 @@ import Button from '../UI/Button';
 import Title from '../UI/Title';
 import Header from '../UI/Header';
 import Image from '../UI/Image';
+import Text from '../UI/Text';
 import Modal from '../Event/Modal';
 
 import withUserInterface from '../../utils/HOCs/withUserInterface';
@@ -29,6 +30,7 @@ class Mobile extends React.PureComponent {
             title: Title,
             button: Button,
             image: Image,
+            text: Text,
         };
 
         const global = {

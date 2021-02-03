@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Button from '../UI/Button';
 import Title from '../UI/Title';
 import Image from '../UI/Image';
+import Text from '../UI/Text';
 import Modal from '../Event/Modal';
 
 import withUserInterface from '../../utils/HOCs/withUserInterface';
@@ -28,6 +29,7 @@ class Panel extends React.PureComponent {
             title: Title,
             image: Image,
             button: Button,
+            text: Text,
         };
 
         const global = {
@@ -50,7 +52,11 @@ class Panel extends React.PureComponent {
                     >
                         <Modal global={global} />
                     </div>
-                    <div className={classNames({ 'Panel-top-layer': !modal.isOpen })}>
+                    <div
+                        className={classNames('Panel-padding', {
+                            'Panel-top-layer': !modal.isOpen,
+                        })}
+                    >
                         {userInterface.components?.map(
                             renderComponents(Components, global, 'panel', 'row')
                         )}

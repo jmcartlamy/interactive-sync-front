@@ -2,9 +2,11 @@
  * General
  */
 
-.Title {
-    margin: 6px 14px 6px;
+.Text {
+    font-size: 14px;
     padding: 6px;
+    margin: 16px;
+    text-align: justify;
     font-weight: normal;
     transition: background-color 0.3s;
     -webkit-user-select: none; /* Safari */
@@ -17,40 +19,52 @@
  * Views
  */
 
-.Panel .Title:first-child {
+.Panel .Text {
+    margin: 20px 20px 0;
+    padding: 0;
+}
+
+.Mobile .Modal .Text {
+    margin: 20px 20px 0;
+    padding: 0;
+}
+
+.Panel .Text:first-child {
     display: flex;
     align-items: center;
-    padding: 0;
     margin: 0 20px;
 }
 
-.Panel .Modal .Title:first-child {
+.Panel .Modal .Text:first-child {
     display: block;
-    padding: 6px;
-    margin: 16px;
+    margin: 20px 20px 0;
+}
+
+.Panel .Modal .Text {
+    margin: 20px 20px 0;
 }
 
 /**
  * Theme
  */
 
-.App-light .Title {
+.App-light .Text {
     color: #232127;
 }
 
-.App-dark .Title {
+.App-dark .Text {
     color: #e5e3e8;
 }
 
-.App-light .VideoOverlay .Title {
+.App-light .VideoOverlay .Text {
     background-color: #efefef;
 }
 
-.App-dark .VideoOverlay .Title {
+.App-dark .VideoOverlay .Text {
     background-color: #212026;
 }
 
-.App-light .VideoOverlay .Title.Title-transparent,
-.App-dark .VideoOverlay .Title.Title-transparent {
+.App-light .VideoOverlay .Text.Text-transparent,
+.App-dark .VideoOverlay .Text.Text-transparent {
     background: none;
 }
