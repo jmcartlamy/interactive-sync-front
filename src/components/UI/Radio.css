@@ -1,0 +1,113 @@
+/**
+ * General
+ */
+
+.Radio {
+    padding: 6px;
+    margin: 16px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.Radio div[role='group'] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.Radio-label-group {
+    margin-bottom: 10px;
+}
+
+.Radio-value {
+    margin: 0 10px 0;
+}
+
+.Radio-value-button {
+    display: none;
+}
+
+.Radio-value-button + label {
+    display: block;
+    padding: 10px 16px;
+    line-height: 1;
+    transition: background-color 0.3s;
+    min-width: 100px;
+    border-radius: 3px;
+}
+
+/**
+ * Views
+ */
+
+.VideoOverlay .Radio {
+    width: 100%;
+}
+
+.Panel .Radio,
+.Mobile .Radio {
+    margin: 20px 20px 0;
+    padding: 0;
+}
+
+/**
+ * Theme
+ */
+
+.App-light .Radio {
+    color: #232127;
+}
+
+.App-dark .Radio {
+    color: #e5e3e8;
+}
+
+.App-light .VideoOverlay .Radio {
+    background-color: #efefef;
+}
+
+.App-dark .VideoOverlay .Radio {
+    background-color: #212026;
+}
+
+.App-light .Radio-value-button + label {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4;
+    border: 1px solid transparent;
+}
+
+.App-light .Radio-value-button:hover + label {
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.02);
+    background-color: #e9e9e9;
+    border-color: #e3e3e3;
+}
+.App-light .Radio-value-button:checked + label {
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.06);
+    background-color: #e3e3e3;
+    border-color: #bababa;
+}
+
+.App-dark .Radio-value-button + label {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+    background-color: #212026;
+    border: 1px solid #111111;
+}
+
+.App-dark .Radio-value-button:hover + label {
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
+    background-color: #2b2a32;
+    border-color: #111111;
+}
+
+.App-dark .Radio-value-button:checked + label {
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.35);
+    background-color: #3d3c44;
+    border-color: #212026;
+}
+
+.App-light .VideoOverlay .Radio.Radio-transparent,
+.App-dark .VideoOverlay .Radio.Radio-transparent,
+.App-light .VideoOverlay .Radio-value-button + label.Radio-transparent,
+.App-dark .VideoOverlay .Radio-value-button + label.Radio-transparent {
+    background: none;
+}

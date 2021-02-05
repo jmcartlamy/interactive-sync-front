@@ -2,6 +2,7 @@ import React, { useRef, useState, useCallback } from 'react';
 import { useFormik } from 'formik';
 import classNames from 'classnames';
 import { useRipple } from 'react-use-ripple';
+import * as Yup from 'yup';
 
 import sendInputEvent from '../../api/sendInputEvent';
 import Title from '../UI/Title';
@@ -9,6 +10,7 @@ import Header from '../UI/Header';
 import Input from '../UI/Input';
 import Image from '../UI/Image';
 import Text from '../UI/Text';
+import Radio from '../UI/Radio';
 
 import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
@@ -75,11 +77,16 @@ const Modal = ({ global }) => {
      * Formik form
      */
 
+    const extension = actions.current?.extension;
+
     const InitialValuesComponents = {
         input: '',
+        radio: '',
     };
 
-    const extension = actions.current?.extension;
+    const ValidationSchemaComponents = {
+        radio: Yup.string().required('ff'),
+    };
 
     const initialValues = () =>
         extension.components.reduce((acc, { type, name }) => {
@@ -89,10 +96,21 @@ const Modal = ({ global }) => {
             return acc;
         }, {});
 
+    const ModalSchema = () =>
+        Yup.object().shape(
+            extension.components.reduce((acc, { type, name }) => {
+                if (typeof ValidationSchemaComponents[type] !== 'undefined') {
+                    acc[name] = ValidationSchemaComponents[type];
+                }
+                return acc;
+            }, {})
+        );
+
     const formik =
         extension?.components?.length &&
         useFormik({
             initialValues: initialValues(),
+            validationSchema: ModalSchema(),
             enableReinitialize: true,
             onSubmit: sendRequest,
         });
@@ -101,13 +119,14 @@ const Modal = ({ global }) => {
      * Render
      */
 
-    const disabled = (countdown && countdown > 0) || isSending || !modal.isOpen;
+    const disabled = (countdown && countdown > 0) || isSending || !modal.isOpen || !formik?.isValid;
 
     const Components = {
         title: Title,
         input: Input,
         image: Image,
         text: Text,
+        radio: Radio,
     };
 
     return (

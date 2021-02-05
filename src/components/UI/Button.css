@@ -98,6 +98,11 @@
     outline: none;
 }
 
+.App-light .VideoOverlay .Modal-button:hover:enabled,
+.App-light .VideoOverlay .Modal-button:focus:enabled {
+    background: #dedede;
+}
+
 .App-light .Mobile .Button:disabled,
 .App-light .Mobile .Button[disabled],
 .App-light .Panel .Button:disabled,
