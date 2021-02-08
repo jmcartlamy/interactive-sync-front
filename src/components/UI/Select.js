@@ -1,19 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import './Radio.css';
+import './Select.css';
 
-const Radio = ({ global = {}, props, formik = {} }) => {
-    const { label, name, template, values, style, styleValues } = props;
+const Select = ({ global = {}, props, formik = {} }) => {
+    const { type, label, name, template, values, style, styleValues } = props;
     return (
         <div
-            className={classNames('Radio', {
-                'Radio-transparent': global.configUI?.transparent || template === 'button',
+            className={classNames('Select', {
+                'Select-transparent': global.configUI?.transparent || template === 'button',
             })}
             style={style}
         >
             {label && (
-                <div id={`${name}-group`} className="Radio-label-group">
+                <div id={`${name}-group`} className="Select-label-group">
                     {label}
                 </div>
             )}
@@ -22,9 +22,9 @@ const Radio = ({ global = {}, props, formik = {} }) => {
                 {Object.entries(values).map(([key, value]) => (
                     <div>
                         <input
-                            type="radio"
-                            className={classNames('Radio-value', {
-                                'Radio-value-button': template === 'button',
+                            type={type}
+                            className={classNames('Select-value', {
+                                'Select-value-button': template === 'button',
                             })}
                             id={`${name}-${key}`}
                             name={name}
@@ -35,7 +35,7 @@ const Radio = ({ global = {}, props, formik = {} }) => {
                         <label
                             for={`${name}-${key}`}
                             className={classNames({
-                                'Radio-transparent': global.configUI?.transparent,
+                                'Select-transparent': global.configUI?.transparent,
                             })}
                             style={template === 'button' && styleValues}
                         >
@@ -48,4 +48,4 @@ const Radio = ({ global = {}, props, formik = {} }) => {
     );
 };
 
-export default Radio;
+export default Select;

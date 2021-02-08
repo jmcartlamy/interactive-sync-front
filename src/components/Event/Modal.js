@@ -10,7 +10,7 @@ import Header from '../UI/Header';
 import Input from '../UI/Input';
 import Image from '../UI/Image';
 import Text from '../UI/Text';
-import Radio from '../UI/Radio';
+import Select from '../UI/Select';
 
 import { useBodyScrollLock } from '../../utils/hooks/useBodyScrollLock';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
@@ -82,10 +82,12 @@ const Modal = ({ global }) => {
     const InitialValuesComponents = {
         input: '',
         radio: '',
+        checkbox: [],
     };
 
     const ValidationSchemaComponents = {
-        radio: Yup.string().required('ff'),
+        radio: Yup.string().required(),
+        checkbox: Yup.array().min(1),
     };
 
     const initialValues = () =>
@@ -126,7 +128,8 @@ const Modal = ({ global }) => {
         input: Input,
         image: Image,
         text: Text,
-        radio: Radio,
+        radio: Select,
+        checkbox: Select,
     };
 
     return (
@@ -151,9 +154,9 @@ const Modal = ({ global }) => {
                     {extension.components?.length && extension.submit && (
                         <div className="Modal-components">
                             {extension.components.map(
-                                ({ type, ...props }) =>
-                                    Components[type] &&
-                                    React.createElement(Components[type], {
+                                (props) =>
+                                    Components[props.type] &&
+                                    React.createElement(Components[props.type], {
                                         global,
                                         props,
                                         formik,
