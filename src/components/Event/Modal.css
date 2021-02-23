@@ -105,7 +105,7 @@
  */
 
 .VideoOverlay .Modal {
-    width: 75%;
+    max-width: 80%;
     max-height: 200px;
     flex-direction: column;
     transform: translateY(calc(100% + 20px));
