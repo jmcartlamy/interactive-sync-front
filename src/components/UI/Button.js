@@ -5,13 +5,12 @@ import classNames from 'classnames';
 import sendInputEvent from '../../api/sendInputEvent';
 import pickMatchedActions from '../../utils/functions/pickMatchedActions';
 import useInterval from '../../utils/hooks/useInterval';
-import useKeydown from '../../utils/hooks/useKeydown';
 
 import './Button.css';
 
 const Button = ({ global, props, view, direction = 'row' }) => {
     const { actions, userCooldown, modal, configUI } = global;
-    const { name, label, keyCode, extension, style, cooldown } = props;
+    const { name, label, extension, style, cooldown } = props;
 
     /**
      * On Unmount
@@ -84,13 +83,6 @@ const Button = ({ global, props, view, direction = 'row' }) => {
 
     const hasExtension = extension?.components?.length;
     const buttonOnClick = hasExtension ? openModal : sendRequest;
-
-    /**
-     * Set action on keydown
-     */
-    if (keyCode) {
-        useKeydown(keyCode, buttonOnClick, { disabled });
-    }
 
     return (
         <div key={name} className={`Button-container Button-container-${direction}`}>
