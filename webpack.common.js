@@ -6,7 +6,6 @@ const path = require('path'),
 module.exports = {
     entry: {
         panel: './src/panel.js',
-        config: './src/config.js',
         mobile: './src/mobile.js',
         video_overlay: './src/video_overlay.js',
     },
@@ -28,16 +27,6 @@ module.exports = {
         },
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'config.html',
-            template: 'src/assets/html/config.html',
-            chunks: ['config'],
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'live_config.html',
-            template: 'src/assets/html/live_config.html',
-            chunks: ['config'],
-        }),
         new HtmlWebpackPlugin({
             filename: 'panel.html',
             template: 'src/assets/html/panel.html',
