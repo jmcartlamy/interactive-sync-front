@@ -30,6 +30,11 @@
     margin: 16px;
 }
 
+.Mobile :not(.Modal) .Title,
+.Mobile > .Title {
+    margin: 0;
+}
+
 /**
  * Theme
  */

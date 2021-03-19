@@ -24,6 +24,10 @@
     padding: 0;
 }
 
+.Mobile :not(.Modal) .Text {
+    margin: 0;
+}
+
 .Mobile .Modal .Text {
     margin: 20px 20px 0;
     padding: 0;
