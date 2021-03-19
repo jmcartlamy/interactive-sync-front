@@ -30,6 +30,14 @@
     margin: 16px;
 }
 
+.Mobile > .Title {
+    padding: 20px;
+}
+
+.Panel > .Title:first-child {
+    padding: 20px 0;
+}
+
 .Mobile :not(.Modal) .Title,
 .Mobile > .Title {
     margin: 0;

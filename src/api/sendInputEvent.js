@@ -33,7 +33,7 @@ export default async function (global, currentAction, formikValues) {
                         clearTimeout(tempTimeout);
                     }, 3000);
                 } else {
-                    // TODO add notification
+                    // TODO later: add notification
                     setMessage('');
                 }
                 logError(twitch.rig.log, error);

@@ -67,7 +67,7 @@ class Panel extends React.PureComponent {
 
         return (
             <div className="Panel">
-                <Title props={{ label: '¯\\_(ツ)_/¯' }} />
+                <Title props={{ label: 'No application is connected with the extension' }} />
             </div>
         );
     }

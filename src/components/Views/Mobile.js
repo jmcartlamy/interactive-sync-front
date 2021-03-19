@@ -71,7 +71,7 @@ class Mobile extends React.PureComponent {
 
         return (
             <div className="Mobile">
-                <Title props={{ label: '¯\\_(ツ)_/¯' }} />
+                <Title props={{ label: 'No application is connected with the extension' }} />
             </div>
         );
     }
