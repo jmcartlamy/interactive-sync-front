@@ -43,6 +43,20 @@ class VideoOverlay extends React.PureComponent {
             configUI,
         };
 
+        if (userInterface && !auth.getHost()) {
+            return (
+                <div className="VideoOverlay">
+                    <div className="VideoOverlay-bottom-components">
+                        <Title
+                            props={{
+                                label: 'Reload your current page to display the interactions',
+                            }}
+                        />
+                    </div>
+                </div>
+            );
+        }
+
         if (userInterface) {
             return (
                 <div className="VideoOverlay">

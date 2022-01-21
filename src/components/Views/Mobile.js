@@ -43,6 +43,16 @@ class Mobile extends React.PureComponent {
             configUI,
         };
 
+        if (userInterface && !auth.getHost()) {
+            return (
+                <div className="Mobile">
+                    <Title
+                        props={{ label: 'Reload your current page to display the interactions' }}
+                    />
+                </div>
+            );
+        }
+
         if (userInterface) {
             return (
                 <div className="Mobile" style={userInterface.style}>

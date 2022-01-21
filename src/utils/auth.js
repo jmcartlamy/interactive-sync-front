@@ -15,6 +15,15 @@ const auth = {
         state.opaque_id = auth.userId;
     },
 
+    // Set host coming from extension configuration to create request
+    setHost: function (host) {
+        state.host = host;
+    },
+
+    getHost: function () {
+        return state.host;
+    },
+
     // Checks to ensure there is a valid token in the state
     isAuthenticated: function () {
         if (state.token && state.opaque_id) {
@@ -26,12 +35,9 @@ const auth = {
 
     // Prepare request to make calls
     createRequest: function (method = 'GET', path = '') {
-        const host =
-            process.env.NODE_ENV === 'production'
-                ? '//interactive-sync-ebs.azurewebsites.net/'
-                : '//localhost:8081/';
+        const host = process.env.NODE_ENV === 'production' ? state.host : '//localhost:8081/';
 
-        if (this.isAuthenticated()) {
+        if (typeof host !== 'undefined' && this.isAuthenticated()) {
             return {
                 method: method,
                 url: location.protocol + host + path,

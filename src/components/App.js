@@ -51,6 +51,23 @@ class App extends React.Component {
             this.twitch.onContext((context, delta) => {
                 this.contextUpdated(context, delta);
             });
+
+            this.twitch.configuration.onChanged(() => {
+                if (this.twitch.configuration.broadcaster) {
+                    try {
+                        // Parsing the array saved in broadcaster content
+                        const config = JSON.parse(this.twitch.configuration.broadcaster.content);
+
+                        if (typeof config === 'object' && typeof config.host === 'string') {
+                            // Add the server host in order to send the actions
+                            auth.setHost(config.host);
+                            // ⚠️ Extensions need to have re-rendered to be taken into account
+                        }
+                    } catch (err) {
+                        console.log('Invalid config', err);
+                    }
+                }
+            });
         }
     }
 
