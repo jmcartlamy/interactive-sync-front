@@ -4,13 +4,13 @@ A Twitch extension connected to the [Twitch API](https://dev.twitch.tv/docs/api)
 
 ## Using the Twitch Developer Rig
 
-The required path to using this extension is with the [Developer Rig](https://github.com/twitchdev/developer-rig).
+The required way to using this extension is with the [Developer Rig](https://dev.twitch.tv/docs/extensions/rig).
 
 ## Extension Views
 
 ### Running front-end files
 
-In a terminal, install dependencies and run `yarn start` to start the webpack server. 
+In a terminal, install dependencies and run `yarn start` to start the webpack server.
 
 Then, open your Developer Rig and go on **Extension Views** tab to create your views or refresh them after a change.
 
@@ -20,9 +20,8 @@ Considering it's to deploy in a host test, run `yarn build`, zip all the files i
 
 ## Available Commands
 
-| Command | Description |
-|---------|-------------|
-| `yarn install` | Install front-end dependencies |
-| `yarn start` | Run webpack server in watch mode and emit on `dist/`|
-| `yarn build` | Build webpack server and emit on `dist/` |
-
+| Command        | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `yarn install` | Install front-end dependencies                       |
+| `yarn start`   | Run webpack server in watch mode and emit on `dist/` |
+| `yarn build`   | Build webpack server and emit on `dist/`             |
